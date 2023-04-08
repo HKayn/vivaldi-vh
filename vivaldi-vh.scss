@@ -1,0 +1,65 @@
+/*
+	Vivaldi VH
+  Version: 1.0.0
+  Target Vivaldi Browser versions: 5.7, 5.8
+
+	Vivaldi VH is a CSS modification for Vivaldi Browser that grants your webpages the entire vertical space of the browser window by moving the rest of the UI into a separate column.
+
+	Copyright (c) 2023 HKayn <https://hkayn.com>
+*/
+
+@use "variables";
+@use "grid-items";
+@use "toolbar-elements";
+
+#{variables.$select-has-valid-browser-settings} {
+  @include variables.custom-properties-define;
+
+  @include grid-items.grid-layout-styles;
+
+  @include grid-items.title-bar-styles;
+  @include grid-items.address-bar-styles;
+  @include grid-items.bookmark-bar-styles;
+  @include grid-items.panel-styles;
+  @include grid-items.status-bar-styles;
+  @include grid-items.webpage-styles;
+
+  @include toolbar-elements.address-field-styles;
+  @include toolbar-elements.extensions-styles;
+  @include toolbar-elements.flexible-space-styles;
+  @include toolbar-elements.page-zoom-controls-styles;
+  @include toolbar-elements.search-field-styles;
+  @include toolbar-elements.status-info-styles;
+
+  // Command Chain Flag bindings
+  @include variables.mixin-bind-command-chain-flag(
+    "addressbar-universal-flex-grow",
+    true
+  ) {
+    @include grid-items.address-bar-universal-flex-grow;
+  }
+  @include variables.mixin-bind-command-chain-flag(
+    "statusbar-universal-flex-grow",
+    true
+  ) {
+    @include grid-items.status-bar-universal-flex-grow;
+  }
+  @include variables.mixin-bind-command-chain-flag(
+    "webpage-permanent-padding",
+    true
+  ) {
+    @include grid-items.webpage-permanent-padding;
+  }
+  @include variables.mixin-bind-command-chain-flag(
+    "addressfield-extend-on-focus",
+    true
+  ) {
+    @include toolbar-elements.address-field-extend-on-focus;
+  }
+  @include variables.mixin-bind-command-chain-flag(
+    "searchfield-extend-on-focus",
+    true
+  ) {
+    @include toolbar-elements.search-field-extend-on-focus;
+  }
+}

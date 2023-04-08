@@ -1,0 +1,19 @@
+// This file contains properties of UI elements that are not accessible via CSS variables.
+// It migitates the issue of magic numbers by granting them semantic meaning-
+
+$window-edge-distance: 9px; // matches perceived horizontal distance between Vivaldi icon and window edge inside the title bar
+
+$address-field-height: 24px;
+$extension-button-width: 34px;
+$extension-button-icon-width: 16px;
+
+$panel-width: 35px;
+
+$webview-container-has-mosaic-padding: 2px;
+$mosaic-tile-margin: 4px;
+
+// Values not directly derived from vanilla CSS below
+
+$address-field-min-width: 254px;
+// This is a workaround
+// Without a minimum width, if the width of the address field is lower than the value set here, it will stretch up to it when loading a webpage

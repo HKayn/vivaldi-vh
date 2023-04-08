@@ -1,0 +1,43 @@
+@use "../variables";
+
+$-namespace: "vvh-";
+$-prefix-enable: "#{$-namespace}enable-";
+$-prefix-disable: "#{$-namespace}disable-";
+
+@mixin exists($flag) {
+  :has(
+      :is(#{variables.$select-editable-toolbars})
+        button[title="#{$-namespace}#{$flag}"]
+    ) {
+    @content;
+  }
+
+  #browser:not(.toolbar-edit-mode)
+    #{variables.$select-quick-command-toolbar-button}:has(
+      button[title="#{$-prefix-enable}#{$flag}"],
+      button[title="#{$-prefix-disable}#{$flag}"]
+    ) {
+    display: none;
+  }
+}
+
+@mixin bind($flag, $default-state) {
+}
+
+@mixin does-not-exist($flag) {
+  :not(
+      :has(
+          :is(#{variables.$select-editable-toolbars})
+            button[title="#{$-namespace}#{$flag}"]
+        )
+    ) {
+    @content;
+  }
+
+  #browser:not(.toolbar-edit-mode)
+    #{variables.$select-quick-command-toolbar-button}:has(
+      button[title="#{$-namespace}#{$flag}"]
+    ) {
+    display: none;
+  }
+}

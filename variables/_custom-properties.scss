@@ -1,0 +1,26 @@
+@use "hard-coded-property-values" as value-of;
+@use "selectors" as select;
+
+// This file collects reused property values to maintain consistency.
+
+@mixin define {
+  --vvh-mainbar-row-height: 36px;
+  --vvh-header-height: 34px;
+  --vvh-mainbar-row-height: 36px;
+  --vvh-header-height: 34px;
+  //--vvh-input-field-extend-on-focus-margin: calc(
+  //  min(100% - 100vw, 0px) + 9px
+  //) !important;
+
+  #browser:has(#{select.$panel}.left) {
+    --vvh-input-field-extend-on-focus-margin: calc(
+      max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
+    ) !important;
+  }
+
+  #browser:has(#{select.$panel}.right) {
+    --vvh-input-field-extend-on-focus-margin: calc(
+      max(100% - 1200px, 100% - 100vw) + calc(#{value-of.$window-edge-distance} + #{value-of.$panel-width})
+    ) !important;
+  }
+}

@@ -1,0 +1,19 @@
+@use "../variables";
+
+@mixin styles {
+  // This positioning fixes the bookmark bar unnecessarily growing past the Pillar width when "Show Bookmark Bar" is initially toggled on.
+  #{variables.$select-bookmark-bar} {
+    position: relative;
+
+    .observer {
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  // TODO: Remove this when Vivaldi 5.8 reaches stable.
+  // This fixes the tab bar stacking over the bookmark bar when the bookmark bar position is set to "bottom".
+  #browser.bookmark-bar-bottom #{variables.$select-bookmark-bar} .observer {
+    z-index: 1;
+  }
+}

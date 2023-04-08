@@ -1,0 +1,392 @@
+@use "../variables";
+
+// Grid columns are determined by the following settings:
+// * Tab Bar Position (Is it on the same side as the panel?)
+// * Panel Position (Is it on the same side as the tab bar?)
+
+// Pillar structure is determined by the following settings:
+// * Address Bar Position
+// * Panel Position (Is it on the same side as the tab bar?)
+// * Address Bar Position
+// * Show Bookmark Bar
+// * Bookmark Bar Position
+
+@mixin styles {
+  #browser {
+    display: grid;
+
+    #header,
+    #main,
+    #main .mainbar,
+    #main .inner {
+      display: contents;
+    }
+
+    #{variables.$select-webpage} {
+      grid-row: 1 / -1;
+    }
+
+    &.tabs-left {
+      &:has(#{variables.$select-panel}.left) {
+        grid-template-columns: min-content min-content 1fr;
+
+        #{variables.$select-title-bar},
+        #{variables.$select-address-bar},
+        #{variables.$select-title-bar-menu-position-horizontal},
+        #{variables.$select-bookmark-bar},
+        #{variables.$select-footer-has-status-bar} {
+          grid-column: 1 / 3;
+        }
+
+        #{variables.$select-panel} {
+          grid-column: 1 / 2;
+        }
+
+        #{variables.$select-tab-bar} {
+          grid-column: 2 / 3;
+        }
+
+        #{variables.$select-webpage} {
+          grid-column: 3 / 4;
+        }
+      }
+
+      &:has(#{variables.$select-panel}.right) {
+        grid-template-columns: min-content 1fr min-content;
+
+        #{variables.$select-title-bar},
+        #{variables.$select-address-bar},
+        #{variables.$select-title-bar-menu-position-horizontal},
+        #{variables.$select-bookmark-bar},
+        #{variables.$select-footer-has-status-bar} {
+          grid-column: 1 / 2;
+        }
+
+        #{variables.$select-panel} {
+          grid-column: 3 / 4;
+          grid-row: 1 / -1 !important; // override grid-row values that assume the panel to be inside the Pillar
+        }
+
+        #{variables.$select-tab-bar} {
+          grid-column: 1 / 2;
+        }
+
+        #{variables.$select-webpage} {
+          grid-column: 2 / 3;
+        }
+      }
+    }
+
+    &.tabs-right {
+      &:has(#{variables.$select-panel}.left) {
+        grid-template-columns: min-content 1fr min-content;
+
+        #{variables.$select-title-bar},
+        #{variables.$select-address-bar},
+        #{variables.$select-title-bar-menu-position-horizontal},
+        #{variables.$select-bookmark-bar},
+        #{variables.$select-footer-has-status-bar} {
+          grid-column: 3 / 4;
+        }
+
+        #{variables.$select-panel} {
+          grid-column: 1 / 2;
+          grid-row: 1 / -1 !important; // override grid-row values that assume the panel to be inside the Pillar
+        }
+
+        #{variables.$select-tab-bar} {
+          grid-column: 3 / 4;
+        }
+
+        #{variables.$select-webpage} {
+          grid-column: 2 / 3;
+        }
+      }
+
+      &:has(#{variables.$select-panel}.right) {
+        grid-template-columns: 1fr min-content min-content;
+
+        #{variables.$select-title-bar},
+        #{variables.$select-address-bar},
+        #{variables.$select-title-bar-menu-position-horizontal},
+        #{variables.$select-bookmark-bar},
+        #{variables.$select-footer-has-status-bar} {
+          grid-column: 2 / 4;
+        }
+
+        #{variables.$select-panel} {
+          grid-column: 3 / 4;
+        }
+
+        #{variables.$select-tab-bar} {
+          grid-column: 2 / 3;
+        }
+
+        #{variables.$select-webpage} {
+          grid-column: 1 / 2;
+        }
+      }
+    }
+
+    #{variables.$select-title-bar},
+    #{variables.$select-title-bar-menu-position-horizontal} {
+      grid-row: 1 / 2;
+    }
+
+    footer {
+      grid-row: -2 / -1;
+    }
+
+    &.disable-titlebar {
+      &.address-top {
+        &.bookmark-bar-top {
+          grid-template-rows: min-content min-content 1fr;
+
+          #{variables.$select-address-bar} {
+            grid-row: 1 / 2;
+          }
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 3 / 4;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content min-content 1fr min-content;
+          }
+        }
+
+        &.bookmark-bar-bottom {
+          grid-template-rows: min-content 1fr min-content;
+
+          #{variables.$select-address-bar} {
+            grid-row: 1 / 2;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 3 / 4;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content 1fr min-content min-content;
+          }
+        }
+
+        &.bookmark-bar-top-off,
+        &.bookmark-bar-bottom-off {
+          grid-template-rows: min-content 1fr;
+
+          #{variables.$select-address-bar} {
+            grid-row: 1 / 2;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 2 / 3;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content 1fr min-content;
+          }
+        }
+      }
+
+      &.address-bottom {
+        &.bookmark-bar-top {
+          grid-template-rows: min-content 1fr min-content;
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 1 / 2;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-address-bar} {
+            grid-row: 3 / 4;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content 1fr min-content min-content;
+          }
+        }
+
+        &.bookmark-bar-bottom {
+          grid-template-rows: 1fr min-content min-content;
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 1 / 2;
+          }
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-address-bar} {
+            grid-row: 3 / 4;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: 1fr min-content min-content min-content;
+          }
+        }
+
+        &.bookmark-bar-top-off,
+        &.bookmark-bar-bottom-off {
+          grid-template-rows: 1fr min-content;
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 1 / 2;
+          }
+
+          #{variables.$select-address-bar} {
+            grid-row: 2 / 3;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: 1fr min-content min-content;
+          }
+        }
+      }
+    }
+
+    &:not(.disable-titlebar) {
+      &.address-top {
+        &.bookmark-bar-top {
+          grid-template-rows: min-content min-content min-content 1fr;
+
+          #{variables.$select-address-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 3 / 4;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 4 / 5;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content min-content min-content 1fr min-content;
+          }
+        }
+
+        &.bookmark-bar-bottom {
+          grid-template-rows: min-content min-content 1fr min-content;
+
+          #{variables.$select-address-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 3 / 4;
+          }
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 4 / 5;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content min-content 1fr min-content min-content;
+          }
+        }
+
+        &.bookmark-bar-top-off,
+        &.bookmark-bar-bottom-off {
+          grid-template-rows: min-content min-content 1fr;
+
+          #{variables.$select-address-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 3 / 4;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content min-content 1fr min-content;
+          }
+        }
+      }
+
+      &.address-bottom {
+        &.bookmark-bar-top {
+          grid-template-rows: min-content min-content 1fr min-content;
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 3 / 4;
+          }
+
+          #{variables.$select-address-bar} {
+            grid-row: 4 / 5;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content min-content 1fr min-content min-content;
+          }
+        }
+
+        &.bookmark-bar-bottom {
+          grid-template-rows: min-content 1fr min-content min-content;
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-bookmark-bar} {
+            grid-row: 3 / 4;
+          }
+
+          #{variables.$select-address-bar} {
+            grid-row: 4 / 5;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content 1fr min-content min-content min-content;
+          }
+        }
+
+        &.bookmark-bar-top-off,
+        &.bookmark-bar-bottom-off {
+          grid-template-rows: min-content 1fr min-content;
+
+          #{variables.$select-panel},
+          #{variables.$select-tab-bar} {
+            grid-row: 2 / 3;
+          }
+
+          #{variables.$select-address-bar} {
+            grid-row: 3 / 4;
+          }
+
+          &:has(#{variables.$select-status-bar}) {
+            grid-template-rows: min-content 1fr min-content min-content;
+          }
+        }
+      }
+    }
+  }
+}

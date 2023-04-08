@@ -1,0 +1,9 @@
+@use "../variables";
+
+@mixin styles {
+  #browser.toolbar-edit-mode #{variables.$select-flexible-space} > * {
+    background-color: var(--colorBgDark);
+    border: 1px solid var(--colorFg);
+  }
+	// This is meant to make flexible spaces more obvious in the toolbar editor when universal flex-grow is enabled.
+}

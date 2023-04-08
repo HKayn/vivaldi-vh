@@ -1,0 +1,37 @@
+@use "../variables";
+
+@mixin styles {
+  #{variables.$select-title-bar-menu-position-horizontal} {
+    align-items: center;
+
+    > * {
+      margin: 0 !important; // override inline styling for proper centering along the flex axis
+    }
+
+    .horizontal-menu-pagetitle {
+      width: 0;
+      flex: 1;
+    }
+  }
+
+  #{variables.$select-title-bar} {
+    display: flex;
+    position: relative;
+    height: var(--vvh-header-height);
+    background-color: var(--colorBg);
+    -webkit-app-region: drag;
+
+    > * {
+      height: 100%;
+    }
+
+    > .window-buttongroup button {
+      height: 100%;
+    }
+  }
+
+  :has(#browser.color-behind-tabs-off:not(.is-settingspage))
+    #{variables.$select-title-bar} {
+    background-color: var(--colorAccentBg);
+  }
+}

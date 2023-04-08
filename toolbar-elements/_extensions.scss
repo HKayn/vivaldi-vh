@@ -1,0 +1,68 @@
+@use "../variables";
+
+@mixin styles {
+  .toolbar-extensions {
+    flex-basis: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(variables.$value-of-extension-button-width, 1fr)
+    );
+    justify-content: space-between;
+    align-items: start;
+
+    > .button-toolbar {
+      &:has(> button[name="Extensions"]) {
+        grid-row: 1 / -9999; // "grid-row: 1 / -1" did not achieve the desired result
+        height: 100%;
+      }
+
+      > button[name="Extensions"] {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .button-badge {
+        right: unset;
+        translate: calc(variables.$value-of-extension-button-icon-width / 2) 0;
+      }
+    }
+
+    // This hides the empty div element that appears when opening the html popup of extensions
+    // at certain positions in the extensions container.
+    // TODO: Find a better fix. This div briefly flashes before being hidden.
+    > div:last-child:empty {
+      display: none;
+    }
+  }
+
+  :has(.tabs-left) .toolbar-extensions {
+    :has(button[name="Extensions"]) {
+      grid-template-columns: variables.$value-of-extension-button-width repeat(
+          auto-fit,
+          minmax(variables.$value-of-extension-button-width, 1fr)
+        );
+    }
+
+    > .button-toolbar:has(> button[name="Extensions"]) {
+      grid-column: 1 / 2;
+    }
+  }
+
+  :has(.tabs-right) .toolbar-extensions {
+    :has(button[name="Extensions"]) {
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(variables.$value-of-extension-button-width, 1fr)
+        )
+        variables.$value-of-extension-button-width;
+    }
+
+    > .button-toolbar:has(> button[name="Extensions"]) {
+      grid-column: -1 / -2;
+    }
+  }
+}

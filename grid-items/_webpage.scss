@@ -1,0 +1,29 @@
+@use "../variables";
+
+@mixin styles {
+  #webpage-stack {
+    -webkit-app-region: drag;
+
+    .webpageview,
+    .mosaic-split {
+      -webkit-app-region: no-drag;
+    }
+  }
+}
+
+@mixin permanent-padding {
+  #{variables.$select-webpage}:not(:has(#webpage-stack .mosaic.visible)) {
+    padding: variables.$value-of-webview-container-has-mosaic-padding;
+    box-shadow: inset 0 0 0 8px var(--colorBgDarker);
+
+    .webpageview.visible {
+      margin: variables.$value-of-mosaic-tile-margin;
+      border-radius: var(--radiusCap);
+      box-shadow: 0 0 0 2px var(--colorBorder);
+
+      > .row-wrapper {
+        border-radius: var(--radiusCap);
+      }
+    }
+  }
+}

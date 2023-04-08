@@ -1,0 +1,8 @@
+@use "../variables";
+
+@mixin styles {
+  #{variables.$select-panel} {
+    max-width: unset;
+    border-color: var(--colorBorder);
+  }
+}

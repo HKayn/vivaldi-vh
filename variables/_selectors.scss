@@ -1,0 +1,25 @@
+// This file contains selectors that can be reused and/or are in need of semantic meaning.
+
+// Settings check intended to act as a failsafe
+$has-valid-browser-settings: ":root:has(#browser:not(.disable-titlebar):is(.tabs-left, .tabs-right):is(.address-top, .address-bottom))";
+
+// Grid items
+$title-bar: "#titlebar";
+$title-bar-menu-position-horizontal: "#header .topmenu";
+$address-bar: "#main .toolbar-mainbar";
+$bookmark-bar: "#main .bookmark-bar";
+$panel: "#panels-container";
+$tab-bar: "#main > .inner > :has(#tabs-tabbar-container)"; // TODO: Change this to "#main .tabbar-wrapper" when Vivaldi 5.8 reaches stable.
+$footer-has-status-bar: "footer:has(.toolbar-statusbar)"; // This cannot be nested within another :has()
+$webpage: "#webview-container";
+
+// Other toolbars not listed above
+$status-bar: "footer .toolbar-statusbar";
+
+// Toolbar elements
+$quick-command-toolbar-button: ".button-toolbar.toolbar-command";
+$toolbar-editor-modal: "#modal-bg.toolbar-editor";
+$flexible-space: ".toolbar-spacer-flexible";
+
+// Combined variables
+$editable-toolbars: "#{$address-bar}, #{$panel}, #{$status-bar}";

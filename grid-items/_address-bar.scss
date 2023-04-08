@@ -1,0 +1,21 @@
+@use "../variables";
+
+@mixin styles {
+  #{variables.$select-address-bar} {
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+  }
+}
+
+@mixin universal-flex-grow {
+  #{variables.$select-address-bar} {
+    > * {
+      flex-grow: 1;
+    }
+  }
+
+  #browser:not(.toolbar-edit-mode) #{variables.$select-address-bar} #{variables.$select-flexible-space} {
+    display: none;
+  }
+}

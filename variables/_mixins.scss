@@ -1,0 +1,68 @@
+@use "selectors";
+
+// This file collects reused styles to maintain consistency.
+
+@mixin extend-on-focus($element, $text-input) {
+  #browser {
+    &.tabs-left {
+      #{$element}:has(#{$text-input}:focus) {
+        margin-right: var(--vvh-input-field-extend-on-focus-margin);
+      }
+    }
+
+    &.tabs-right {
+      #{$element}:has(#{$text-input}:focus) {
+        margin-left: var(--vvh-input-field-extend-on-focus-margin);
+      }
+    }
+  }
+  #{$element} {
+    transition: margin cubic-bezier(0, 1, 0.25, 1) 0.2s,
+      flex-basis cubic-bezier(0, 1, 0.25, 1) 0.2s;
+
+    &:has(#{$text-input}:focus) {
+      flex-basis: 100vw !important;
+      box-shadow: 0 0 16px 1px var(--colorBorder);
+    }
+  }
+}
+
+$-command-chain-flag-namespace: "vvh-";
+$-command-chain-flag-prefix-enable: "#{$-command-chain-flag-namespace}enable-";
+$-command-chain-flag-prefix-disable: "#{$-command-chain-flag-namespace}disable-";
+
+@mixin bind-command-chain-flag($flag, $enabled-by-default: false) {
+  @if $enabled-by-default {
+    @include does-not-exist(#{$-command-chain-flag-prefix-disable}#{$flag}) {
+      @content;
+    }
+  } @else {
+    @include exists(#{$-command-chain-flag-prefix-enable}#{$flag}) {
+      @include does-not-exist(#{$-command-chain-flag-prefix-disable}#{$flag}) {
+        @content;
+      }
+    }
+  }
+
+  #browser:not(.toolbar-edit-mode)
+    #{selectors.$quick-command-toolbar-button}:has(
+      button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"],
+      button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"]
+    ) {
+    display: none;
+  }
+}
+
+@mixin exists($full-flag) {
+  > :has(:is(#{selectors.$editable-toolbars}) button[title="#{$full-flag}"]) {
+    @content;
+  }
+}
+
+@mixin does-not-exist($full-flag) {
+  > :not(
+      :has(:is(#{selectors.$editable-toolbars}) button[title="#{$full-flag}"])
+    ) {
+    @content;
+  }
+}

@@ -1,0 +1,34 @@
+@use "../variables";
+
+@mixin styles {
+  #{variables.$select-footer-has-status-bar} {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    &:after {
+      content: none;
+    }
+
+    .toolbar-statusbar {
+      flex-wrap: wrap;
+      height: auto;
+    }
+  }
+}
+
+@mixin universal-flex-grow {
+  #{variables.$select-status-bar} {
+    justify-content: center;
+
+    > * {
+      flex-grow: 1;
+    }
+
+    .button-toolbar button:hover {
+      background-color: var(--colorBgDark);
+    }
+  }
+
+  #browser:not(.toolbar-edit-mode) #{variables.$select-status-bar} #{variables.$select-flexible-space} {
+    display: none;
+  }
+}
