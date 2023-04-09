@@ -9,6 +9,10 @@
       -webkit-app-region: no-drag;
     }
   }
+
+  #panels-container.overlay:not(.minimized).button.right ~ div:last-of-type {
+    margin-right: 0; // This exact selector normally sets margin-right to 10px, presumably in an attempt to account for the panel toggle. (last observed on 5.8.2978.3)
+  }
 }
 
 @mixin permanent-padding {
