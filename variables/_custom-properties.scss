@@ -5,16 +5,29 @@
 
 @mixin declare {
   #browser {
-    &:has(#{select.$panel}.left) {
+    &:has(#{select.$panel}.switcher) {
+      --vvh-input-field-extend-on-focus-margin-offset: 0px;
+    }
+    &:has(#{select.$panel}.switcher #panel_switch) {
+      --vvh-input-field-extend-on-focus-margin-offset: #{value-of.$panel-toggle-width};
+    }    
+    --vvh-input-field-extend-on-focus-margin-offset: #{value-of.$panel-width};
+    &:has(#panel_switch) {
+      --vvh-input-field-extend-on-focus-margin-offset: calc(#{value-of.$panel-toggle-width} + #{value-of.$panel-width});
+    }
+
+    &.tabs-left:has(#{select.$panel}.left),
+    &.tabs-right:has(#{select.$panel}.right) {
       --vvh-input-field-extend-on-focus-margin: calc(
         max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
       ) !important;
     }
 
-    &:has(#{select.$panel}.right) {
+    &.tabs-left:has(#{select.$panel}.right),
+    &.tabs-right:has(#{select.$panel}.left) {
       --vvh-input-field-extend-on-focus-margin: calc(
         max(100% - 1200px, 100% - 100vw) +
-          calc(#{value-of.$window-edge-distance} + #{value-of.$panel-width})
+          calc(#{value-of.$window-edge-distance} + var(--vvh-input-field-extend-on-focus-margin-offset))
       ) !important;
     }
   }
