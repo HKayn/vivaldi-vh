@@ -6,11 +6,6 @@
 @mixin define {
   --vvh-mainbar-row-height: 36px;
   --vvh-header-height: 34px;
-  --vvh-mainbar-row-height: 36px;
-  --vvh-header-height: 34px;
-  //--vvh-input-field-extend-on-focus-margin: calc(
-  //  min(100% - 100vw, 0px) + 9px
-  //) !important;
 
   #browser:has(#{select.$panel}.left) {
     --vvh-input-field-extend-on-focus-margin: calc(
