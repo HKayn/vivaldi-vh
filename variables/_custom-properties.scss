@@ -4,7 +4,7 @@
 // This file collects reused property values to maintain consistency.
 
 @mixin define {
-  --vvh-mainbar-row-height: 36px;
+  --vvh-mainbar-row-height: 34px;
   --vvh-header-height: 30px;
 
   #browser:has(#{select.$panel}.left) {
