@@ -4,7 +4,7 @@
   .UrlBar-AddressField {
     margin: calc(
         calc(
-            var(--vvh-mainbar-row-height) -
+            variables.$value-of-address-bar-height -
               variables.$value-of-address-field-height
           ) / 2
       )

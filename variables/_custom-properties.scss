@@ -5,8 +5,6 @@
 
 @mixin declare {
   #browser {
-    --vvh-mainbar-row-height: 34px;  
-
     &:has(#{select.$panel}.left) {
       --vvh-input-field-extend-on-focus-margin: calc(
         max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
