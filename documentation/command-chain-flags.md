@@ -22,30 +22,11 @@ For each flag, the following precedence rules apply:
 
 ## Available Flags
 
-### Extend address field width when editing input
-
-**`vvh-enable-addressfield-extend-on-focus`** (default) \
-`vvh-disable-addressfield-extend-on-focus`
-
-The address field extends beyond the Pillar width when the input area is in focus.
-
-### Extend search field width when editing input
-
-**`vvh-enable-searchfield-extend-on-focus`** (default) \
-`vvh-disable-searchfield-extend-on-focus`
-
-The search field extends beyond the Pillar width when the input area is in focus.
-
-### Permanent padding around webpage
-
-**`vvh-enable-webpage-permanent-padding`** (default) \
-`vvh-disable-webpage-permanent-padding`
-
-The padding around webpages that normally only appears when tab tiling is active is permanently visible.
-
 ### Grow width of address bar components to occupy free space
 
-**`vvh-enable-addressbar-universal-flex-grow`** (default) \
+*Enabled by default.*
+
+`vvh-enable-addressbar-universal-flex-grow` \
 `vvh-disable-addressbar-universal-flex-grow`
 
 The width of individual components in the address bar grows to occupy free space in their row. This can also grow their click area.
@@ -54,16 +35,56 @@ Additionally, flexible spacers inside the address bar are hidden.
 
 ### Grow width of status bar components to occupy free space
 
-**`vvh-enable-statusbar-universal-flex-grow`** (default) \
+*Enabled by default.*
+
+`vvh-enable-statusbar-universal-flex-grow` \
 `vvh-disable-statusbar-universal-flex-grow`
 
 The width of individual components in the status bar grows to occupy free space in their row. This can also grow their click area.
 
 Additionally, flexible spacers inside the status bar are hidden.
 
+### Permanent padding around webpage
+
+*Enabled by default.*
+
+`vvh-enable-webpage-permanent-padding` \
+`vvh-disable-webpage-permanent-padding`
+
+The padding around webpages that normally only appears when tab tiling is active is permanently visible.
+
+### Extend address field width when editing input
+
+*Enabled by default.*
+
+`vvh-enable-addressfield-extend-on-focus` \
+`vvh-disable-addressfield-extend-on-focus`
+
+The address field extends beyond the Pillar width when the input area is in focus.
+
+### Extend search field width when editing input
+
+*Enabled by default.*
+
+`vvh-enable-searchfield-extend-on-focus` \
+`vvh-disable-searchfield-extend-on-focus`
+
+The search field extends beyond the Pillar width when the input area is in focus.
+
+### Invert position of hidden extensions toggle
+
+*Disabled by default.*
+
+`vvh-enable-extensions-invert-toggle-position` \
+`vvh-disable-extensions-invert-toggle-position`
+
+The button that toggles the visibility of hidden extensions is placed to the other side of the extensions grid.
+
 ### *(Coming soon!)* Panel at full height
 
+*Disabled by default.*
+
 `vvh-enable-panel-full-height` \
-**`vvh-disable-panel-full-height`** (default)
+`vvh-disable-panel-full-height`
 
 When the panel is on the same side as the tab bar, it is no longer incorporated into the Pillar, but instead positioned at full height between the Pillar and the webpage.
