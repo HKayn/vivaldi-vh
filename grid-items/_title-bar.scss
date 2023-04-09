@@ -17,17 +17,9 @@
   #{variables.$select-title-bar} {
     display: flex;
     position: relative;
-    height: var(--vvh-header-height);
+    min-height: variables.$value-of-title-bar-min-height;
     background-color: var(--colorBg);
     -webkit-app-region: drag;
-
-    > * {
-      height: 100%;
-    }
-
-    > .window-buttongroup button {
-      height: 100%;
-    }
   }
 
   :has(#browser.color-behind-tabs-off:not(.is-settingspage))
