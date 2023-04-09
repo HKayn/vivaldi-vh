@@ -12,9 +12,19 @@
     justify-content: space-between;
     align-items: start;
 
+    &:has(button[name="Extensions"]) {
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(variables.$value-of-extension-button-width, 1fr)
+        )
+        variables.$value-of-extension-button-width;
+    }
+
     > .button-toolbar {
       &:has(> button[name="Extensions"]) {
         grid-row: 1 / -9999; // "grid-row: 1 / -1" did not achieve the desired result
+        grid-column: -1 / -2;
         height: 100%;
       }
 
@@ -37,32 +47,17 @@
       display: none;
     }
   }
+}
 
-  :has(.tabs-left) .toolbar-extensions {
-    :has(button[name="Extensions"]) {
-      grid-template-columns: variables.$value-of-extension-button-width repeat(
-          auto-fit,
-          minmax(variables.$value-of-extension-button-width, 1fr)
-        );
-    }
-
-    > .button-toolbar:has(> button[name="Extensions"]) {
-      grid-column: 1 / 2;
-    }
+@mixin invert-toggle-position {
+  .toolbar-extensions:has(button[name="Extensions"]) {
+    grid-template-columns: variables.$value-of-extension-button-width repeat(
+        auto-fit,
+        minmax(variables.$value-of-extension-button-width, 1fr)
+      );
   }
 
-  :has(.tabs-right) .toolbar-extensions {
-    :has(button[name="Extensions"]) {
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(variables.$value-of-extension-button-width, 1fr)
-        )
-        variables.$value-of-extension-button-width;
-    }
-
-    > .button-toolbar:has(> button[name="Extensions"]) {
-      grid-column: -1 / -2;
-    }
+  .toolbar-extensions > .button-toolbar:has(> button[name="Extensions"]) {
+    grid-column: 1 / 2;
   }
 }

@@ -38,28 +38,38 @@
   ) {
     @include grid-items.address-bar-universal-flex-grow;
   }
+
   @include variables.mixin-bind-command-chain-flag(
     "statusbar-universal-flex-grow",
     true
   ) {
     @include grid-items.status-bar-universal-flex-grow;
   }
+
   @include variables.mixin-bind-command-chain-flag(
     "webpage-permanent-padding",
     true
   ) {
     @include grid-items.webpage-permanent-padding;
   }
+
   @include variables.mixin-bind-command-chain-flag(
     "addressfield-extend-on-focus",
     true
   ) {
     @include toolbar-elements.address-field-extend-on-focus;
   }
+
   @include variables.mixin-bind-command-chain-flag(
     "searchfield-extend-on-focus",
     true
   ) {
     @include toolbar-elements.search-field-extend-on-focus;
+  }
+
+  @include variables.mixin-bind-command-chain-flag(
+    "extensions-invert-toggle-position"
+  ) {
+    @include toolbar-elements.extensions-invert-toggle-position;
   }
 }
