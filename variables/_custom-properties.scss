@@ -3,19 +3,22 @@
 
 // This file collects reused property values to maintain consistency.
 
-@mixin define {
-  --vvh-mainbar-row-height: 34px;
-  --vvh-header-height: 30px;
+@mixin declare {
+  #browser {
+    --vvh-mainbar-row-height: 34px;
+    --vvh-header-height: 30px;
 
-  #browser:has(#{select.$panel}.left) {
-    --vvh-input-field-extend-on-focus-margin: calc(
-      max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
-    ) !important;
-  }
+    &:has(#{select.$panel}.left) {
+      --vvh-input-field-extend-on-focus-margin: calc(
+        max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
+      ) !important;
+    }
 
-  #browser:has(#{select.$panel}.right) {
-    --vvh-input-field-extend-on-focus-margin: calc(
-      max(100% - 1200px, 100% - 100vw) + calc(#{value-of.$window-edge-distance} + #{value-of.$panel-width})
-    ) !important;
+    &:has(#{select.$panel}.right) {
+      --vvh-input-field-extend-on-focus-margin: calc(
+        max(100% - 1200px, 100% - 100vw) +
+          calc(#{value-of.$window-edge-distance} + #{value-of.$panel-width})
+      ) !important;
+    }
   }
 }

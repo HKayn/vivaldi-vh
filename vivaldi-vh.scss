@@ -13,7 +13,7 @@
 @use "toolbar-elements";
 
 #{variables.$select-has-valid-browser-settings} {
-  @include variables.custom-properties-define;
+  @include variables.custom-properties-declare;
 
   @include grid-items.grid-layout-styles;
 
