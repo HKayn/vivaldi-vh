@@ -1,0 +1,11 @@
+// TODO: Incorporate default browser notification into the Pillar
+
+@mixin styles {
+  #modal-bg.default-browser {
+		position: fixed;
+		inset: auto 0 0;
+		z-index: 4; // minimum value necessary to stack over panel and status bar components
+		background-color: var(--colorBg);
+		box-shadow: 0 -4px 9px 0 rgb(0, 0, 0, 0.2);
+	}
+}

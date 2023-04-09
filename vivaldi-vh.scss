@@ -11,6 +11,7 @@
 @use "variables";
 @use "grid-items";
 @use "toolbar-elements";
+@use "ui-elements";
 
 #{variables.$select-has-valid-browser-settings} {
   @include variables.custom-properties-declare;
@@ -30,6 +31,8 @@
   @include toolbar-elements.page-zoom-controls-styles;
   @include toolbar-elements.search-field-styles;
   @include toolbar-elements.status-info-styles;
+
+  @include ui-elements.default-browser-notification-styles;
 
   // Command Chain Flag bindings
   @include variables.mixin-bind-command-chain-flag(
