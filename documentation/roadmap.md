@@ -4,22 +4,21 @@ This document contains all information regarding future changes and known issues
 
 ## Planned Features
 
-The following will be added to Vivaldi VH in the future:
+The following will be added to Vivaldi VH in the future, in no particular order:
 
 - Allow activation of Vivaldi VH when "Show Title Bar" is unchecked.
 - [Panel at full height behind a Command Chain Flag](./command-chain-flags.md#coming-soon-panel-at-full-height).
 - Allow activation of Vivaldi VH when "Show Address Bar" is unchecked.
+- A "Zen Mode" where the webpage takes up the entire browser window, with the Pillar and panel floating in from the sides on demand
 - One-time-use JS modification that adds all available Command Chain Flags as Command Chains.
 - Ongoing updates to maintain compatibility with the latest stable Version of Vivaldi Browser.
 
 ## Considerations
 
-The following are being considered to be added to Vivaldi VH, but have issues that need to be resolved first:
+The following are being considered to be added to Vivaldi VH, but have blockers that need to be resolved first:
 
-- Allow activation of Vivaldi VH when "Show Tab Bar" is unchecked. The Pillar will be constructed using the panel instead.
-  - A closed or floating panel will leave a gap in the Pillar. Setting panels to be non-floating will need to be mandated by Vivaldi VH.
-  - Since this introduces an additional mandated setting, this should be behind a Command Chain Flag and disabled by default.
-  - How should Vivaldi VH behave when the non-floating panel is closed? Gaps in the pillar cause erroneous behaviour across the board, and disabling Vivaldi VH entirely whenver a panel is closed would make for a jarring experience. Assume that there is no tab bar.
+- Allow activation of Vivaldi VH when "Show Tab Bar" is unchecked. The Pillar will be constructed using the panel instead. When the tab bar is not shown, setting panels to be non-floating will be mandated for Vivaldi VH to be active. Since this introduces an additional mandated setting, this will be behind a Command Chain Flag and disabled by default.
+  - How should Vivaldi VH behave when the panel is closed? Gaps in the pillar cause erroneous behaviour across the board, and disabling Vivaldi VH entirely whenver a panel is closed would make for a jarring experience. Assume that there is no tab bar.
 
 I appreciate any opinions that might help solve the listed issues!
 
