@@ -26,7 +26,11 @@
         height: var(--radius);
         width: var(--radius);
         rotate: 180deg;
-        -webkit-mask-image: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 70%, #000 73%);
+        -webkit-mask-image: radial-gradient(
+          circle at 0 0,
+          rgba(0, 0, 0, 0) 70%,
+          #000 73%
+        );
       }
 
       .vivaldi,
@@ -39,18 +43,34 @@
       }
     }
 
-    &.theme-light {
-      #{variables.$select-address-bar} {
-        &::before, &::after {
+    &.color-behind-tabs-on {
+      &.theme-light #{variables.$select-address-bar} {
+        &::before,
+        &::after {
           background-color: var(--colorBgDarker);
+        }
+      }
+
+      &.theme-dark #{variables.$select-address-bar} {
+        &::before,
+        &::after {
+          background-color: var(--colorBgLighter);
         }
       }
     }
 
-    &.theme-dark {
-      #{variables.$select-address-bar} {
-        &::before, &::after {
-          background-color: var(--colorBgLighter);
+    &.color-behind-tabs-off {
+      &.acc-light #{variables.$select-address-bar} {
+        &::before,
+        &::after {
+          background-color: var(--colorAccentBgDark);
+        }
+      }
+
+      &.acc-dark #{variables.$select-address-bar} {
+        &::before,
+        &::after {
+          background-color: var(--colorAccentBgFadedMore);
         }
       }
     }
@@ -183,9 +203,9 @@
 
     &.mac #{variables.$select-address-bar} > .window-buttongroup {
       margin-left: calc(
-          variables.$value-of-mac-window-button-group-margin-left-without-uizoomlevel +
-            variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel
-        );
+        variables.$value-of-mac-window-button-group-margin-left-without-uizoomlevel +
+          variables.$value-of-mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel
+      );
       margin-right: variables.$value-of-mac-address-bar-window-button-group-margin-right;
     }
   }
