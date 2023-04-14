@@ -10,7 +10,7 @@
 
 @use "variables";
 @use "grid-items";
-@use "toolbar-elements";
+@use "toolbar-components";
 @use "ui-elements";
 
 #{variables.$select-has-valid-browser-settings} {
@@ -25,13 +25,13 @@
   @include grid-items.status-bar-styles;
   @include grid-items.webpage-styles;
 
-  @include toolbar-elements.address-field-styles;
-  @include toolbar-elements.extensions-styles;
-  @include toolbar-elements.flexible-space-styles;
-  @include toolbar-elements.page-zoom-controls-styles;
-  @include toolbar-elements.search-field-styles;
-  @include toolbar-elements.status-info-styles;
-  @include toolbar-elements.workspaces-styles;
+  @include toolbar-components.address-field-styles;
+  @include toolbar-components.extensions-styles;
+  @include toolbar-components.flexible-space-styles;
+  @include toolbar-components.page-zoom-controls-styles;
+  @include toolbar-components.search-field-styles;
+  @include toolbar-components.status-info-styles;
+  @include toolbar-components.workspaces-styles;
 
   @include ui-elements.default-browser-notification-styles;
 
@@ -61,19 +61,19 @@
     "addressfield-extend-on-focus",
     true
   ) {
-    @include toolbar-elements.address-field-extend-on-focus;
+    @include toolbar-components.address-field-extend-on-focus;
   }
 
   @include variables.mixin-bind-command-chain-flag(
     "searchfield-extend-on-focus",
     true
   ) {
-    @include toolbar-elements.search-field-extend-on-focus;
+    @include toolbar-components.search-field-extend-on-focus;
   }
 
   @include variables.mixin-bind-command-chain-flag(
     "extensions-invert-toggle-position"
   ) {
-    @include toolbar-elements.extensions-invert-toggle-position;
+    @include toolbar-components.extensions-invert-toggle-position;
   }
 }
