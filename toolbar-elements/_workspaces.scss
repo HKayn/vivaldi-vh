@@ -1,0 +1,5 @@
+@mixin styles {
+  .workspace-popup:not(.tabbar-workspace-button) > button {
+		margin: 0;
+	}
+}
