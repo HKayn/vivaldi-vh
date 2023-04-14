@@ -5,8 +5,10 @@ $window-edge-distance: 9px; // matches perceived horizontal distance between Viv
 
 $title-bar-min-height: calc(25px / var(--uiZoomLevel));
 
-$address-bar-height: 34px; 
+$address-bar-height: 34px;
 $address-field-height: 24px;
+$address-bar-menu-button-width: calc(34px / var(--uiZoomLevel)); // This is intentionally being used over OS-specific widths
+$address-bar-menu-button-width-without-uizoomlevel: 34px;
 $extension-button-width: 34px;
 $extension-button-icon-width: 16px;
 
@@ -15,3 +17,25 @@ $panel-toggle-width: 10px;
 
 $webview-container-has-mosaic-padding: 2px;
 $mosaic-tile-margin: 4px;
+
+// OS-specific values
+$win-address-bar-menu-button-width: calc(46px / var(--uiZoomLevel));
+$win-address-bar-window-button-group-width: calc((46px * 3) / var(--uiZoomLevel));
+$win-address-bar-window-button-group-width-without-uizoomlevel: calc(46px * 3);
+
+$mac-disable-title-bar-address-bar-top-padding-left-without-uizoomlevel: 12px;
+$mac-disable-title-bar-address-bar-top-padding-left: calc(12px / var(--uiZoomLevel));
+$mac-window-button-group-margin-left: calc(8px / var(--uiZoomLevel));
+$mac-window-button-group-margin-left-without-uizoomlevel: 8px;
+$mac-window-button-group-width: calc(54px / var(--uiZoomLevel));
+$mac-window-button-group-width-without-uizoomlevel: 54px;
+$mac-window-button-group-height: 14px;
+$mac-address-bar-window-button-group-margin-right: 18px;
+
+$linux-window-button-group-width: calc(3 * (25px + 2px));
+$linux-window-button-group-height: 20px;
+$linux-address-bar-window-button-group-height: calc($address-bar-height - (2 * (5px / var(--uiZoomLevel))));
+$linux-window-button-group-margin: calc(5px / var(--uiZoomLevel));
+
+// width-total equals total amount of horizonal space taken up
+$mac-address-bar-window-button-group-width-total-without-uizoomlevel: calc($mac-window-button-group-width-without-uizoomlevel + ($mac-window-button-group-margin-left-without-uizoomlevel + $mac-address-bar-window-button-group-margin-right))

@@ -1,7 +1,7 @@
 // This file contains selectors that can be reused and/or are in need of semantic meaning.
 
 // Settings check intended to act as a failsafe
-$has-valid-browser-settings: ":root:has(#browser:not(.disable-titlebar):is(.tabs-left, .tabs-right):is(.address-top, .address-bottom))";
+$has-valid-browser-settings: ":root:has(#browser:is(.tabs-left, .tabs-right):is(.address-top, .address-bottom))";
 
 // Grid items
 $title-bar: "#titlebar";

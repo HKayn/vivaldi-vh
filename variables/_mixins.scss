@@ -6,13 +6,13 @@
   #browser {
     &.tabs-left {
       #{$element}:has(#{$text-input}:focus) {
-        margin-right: var(--vvh-input-field-extend-on-focus-margin);
+        margin-right: var(--vvh-input-field-extend-on-focus-margin) !important; // temporarily override auto margins from address bar partial
       }
     }
 
     &.tabs-right {
       #{$element}:has(#{$text-input}:focus) {
-        margin-left: var(--vvh-input-field-extend-on-focus-margin);
+        margin-left: var(--vvh-input-field-extend-on-focus-margin) !important; // temporarily override auto margins from address bar partial
       }
     }
   }
