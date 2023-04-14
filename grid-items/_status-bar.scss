@@ -17,8 +17,6 @@
 
 @mixin universal-flex-grow {
   #{variables.$select-status-bar} {
-    justify-content: center;
-
     > * {
       flex-grow: 1;
     }
