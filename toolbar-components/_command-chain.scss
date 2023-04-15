@@ -1,0 +1,32 @@
+@use "../variables";
+
+@mixin styles {
+  #{variables.$select-command-chain-toolbar-component} {
+    &:has(> button[title^="vvh-insert-linebreak"]) {
+      flex: 1 1 100%;
+    }
+  }
+
+  #browser:not(.toolbar-edit-mode)
+    #{variables.$select-command-chain-toolbar-component} {
+    &:has(> button[title^="vvh-insert-linebreak"]) {
+      height: 0;
+
+      > button {
+        display: none;
+      }
+    }
+  }
+
+  #browser.toolbar-edit-mode
+    #{variables.$select-command-chain-toolbar-component} {
+    &:has(> button[title^="vvh-insert-linebreak"]) {
+      height: 26px;
+      opacity: 0.5;
+
+      > button {
+        height: 26px;
+      }
+    }
+  }
+}
