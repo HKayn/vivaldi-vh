@@ -28,7 +28,7 @@ When developing Vivaldi VH, I try to hold myself to these values, listed in orde
 
 1. Keep Vivaldi VH a CSS only modification to simplify its installation and to increase compatibility with other CSS and JS modifications. Accompanying scripts may be made available for convenience purposes only.
 2. Only mandate specific browser settings when Vivaldi VH would break horribly or miss crucial functionality without them.
-3. Do not restrict granular customization, e.g. do not hardcode the position of specific toolbar elements.
+3. Do not restrict granular customization, e.g. do not hardcode the position of specific toolbar components.
 4. Stay as close as possible to the default properties of UI elements. Only change how things look when there are special conditions that need to be visually communicated.
 
 ## Known Issues

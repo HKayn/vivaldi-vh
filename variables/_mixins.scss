@@ -45,7 +45,7 @@ $-command-chain-flag-prefix-disable: "#{$-command-chain-flag-namespace}disable-"
   }
 
   #browser:not(.toolbar-edit-mode)
-    #{selectors.$quick-command-toolbar-button}:has(
+    #{selectors.$command-chain-toolbar-component}:has(
       button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"],
       button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"]
     ) {
