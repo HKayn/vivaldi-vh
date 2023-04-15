@@ -46,14 +46,14 @@
       &.theme-light #{variables.$select-address-bar} {
         &::before,
         &::after {
-          background-color: var(--colorBgDarker);
+          background-color: rgb(0, 0, 0, 0.125);
         }
       }
 
       &.theme-dark #{variables.$select-address-bar} {
         &::before,
         &::after {
-          background-color: var(--colorBgLighter);
+          background-color: rgb(255, 255, 255, 0.125);
         }
       }
     }
@@ -62,14 +62,14 @@
       &.acc-light #{variables.$select-address-bar} {
         &::before,
         &::after {
-          background-color: var(--colorAccentBgDark);
+          background-color: rgb(0, 0, 0, 0.125);
         }
       }
 
       &.acc-dark #{variables.$select-address-bar} {
         &::before,
         &::after {
-          background-color: var(--colorAccentBgFadedMore);
+          background-color: rgb(255, 255, 255, 0.125);
         }
       }
     }
