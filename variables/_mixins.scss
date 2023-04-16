@@ -63,17 +63,19 @@ $-command-chain-flag-prefix-disable: "#{$-command-chain-flag-namespace}disable-"
     }
   }
 
-  #browser:not(.toolbar-edit-mode)
-    #{selectors.$command-chain-toolbar-component}:has(
-      button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"],
-      button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"]
-    ) {
-    display: none;
-  }
+  @at-root {
+    #browser:not(.toolbar-edit-mode)
+      #{selectors.$command-chain-toolbar-component}:has(
+        button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"],
+        button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"]
+      ) {
+      display: none;
+    }
 
-  @include highlight-toolbar-component-in-toolbar-editor(
-    '#{selectors.$command-chain-toolbar-component}:has(button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"], button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"])'
-  );
+    @include highlight-toolbar-component-in-toolbar-editor(
+      '#{selectors.$command-chain-toolbar-component}:has(button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"], button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"])'
+    );
+  }
 }
 
 @mixin exists($full-flag) {

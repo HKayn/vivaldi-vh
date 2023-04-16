@@ -18,6 +18,14 @@
     }
   }
 
+  @at-root :root:not(:has(#{variables.$select-browser-with-valid-settings}))
+    #browser:not(.toolbar-edit-mode)
+    #{variables.$select-command-chain-toolbar-component} {
+    &:has(> button[title^="vvh-insert-linebreak"]) {
+      display: none;
+    }
+  }
+
   #browser.toolbar-edit-mode
     #{variables.$select-command-chain-toolbar-component} {
     &:has(> button[title^="vvh-insert-linebreak"]) {
@@ -30,5 +38,9 @@
     }
   }
 
-  @include variables.mixin-highlight-toolbar-component-in-toolbar-editor('#{variables.$select-command-chain-toolbar-component}:has(> button[title^="vvh-insert-linebreak"])');
+  @at-root {
+    @include variables.mixin-highlight-toolbar-component-in-toolbar-editor(
+      '#{variables.$select-command-chain-toolbar-component}:has(> button[title^="vvh-insert-linebreak"])'
+    );
+  }
 }
