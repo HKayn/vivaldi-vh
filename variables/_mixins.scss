@@ -6,13 +6,17 @@
   #browser {
     &.tabs-left {
       #{$element}:has(#{$text-input}:focus) {
-        margin-right: var(--vvh-input-field-extend-on-focus-margin) !important; // temporarily override auto margins from address bar partial
+        margin-right: var(
+          --vvh-input-field-extend-on-focus-margin
+        ) !important; // temporarily override auto margins from address bar partial
       }
     }
 
     &.tabs-right {
       #{$element}:has(#{$text-input}:focus) {
-        margin-left: var(--vvh-input-field-extend-on-focus-margin) !important; // temporarily override auto margins from address bar partial
+        margin-left: var(
+          --vvh-input-field-extend-on-focus-margin
+        ) !important; // temporarily override auto margins from address bar partial
       }
     }
   }
@@ -23,6 +27,21 @@
     &:has(#{$text-input}:focus) {
       flex-basis: 100vw !important;
       box-shadow: 0 0 16px 1px var(--colorBorder);
+    }
+  }
+}
+
+@mixin highlight-toolbar-component-in-toolbar-editor($selector) {
+  #browser.toolbar-edit-mode #{$selector} {
+    opacity: 0.5;
+
+    > button::before {
+      content: " ";
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      border: 1px dashed;
+      border-radius: var(--radius);
     }
   }
 }
@@ -51,6 +70,10 @@ $-command-chain-flag-prefix-disable: "#{$-command-chain-flag-namespace}disable-"
     ) {
     display: none;
   }
+
+  @include highlight-toolbar-component-in-toolbar-editor(
+    '#{selectors.$command-chain-toolbar-component}:has(button[title="#{$-command-chain-flag-prefix-enable}#{$flag}"], button[title="#{$-command-chain-flag-prefix-disable}#{$flag}"])'
+  );
 }
 
 @mixin exists($full-flag) {

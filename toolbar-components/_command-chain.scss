@@ -29,4 +29,6 @@
       }
     }
   }
+
+  @include variables.mixin-highlight-toolbar-component-in-toolbar-editor('#{variables.$select-command-chain-toolbar-component}:has(> button[title^="vvh-insert-linebreak"])');
 }
