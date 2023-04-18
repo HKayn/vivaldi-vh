@@ -6,7 +6,6 @@ This document contains all information regarding future changes and known issues
 
 The following will be added to Vivaldi VH in the future, in no particular order:
 
-- Allow activation of Vivaldi VH when "Show Title Bar" is unchecked.
 - [Panel at full height behind a Command Chain Flag](./command-chain-flags.md#coming-soon-panel-at-full-height).
 - Allow activation of Vivaldi VH when "Show Address Bar" is unchecked.
 - A "Zen Mode" where the webpage takes up the entire browser window, with the Pillar and panel floating in from the sides on demand

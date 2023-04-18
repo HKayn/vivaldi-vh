@@ -29,7 +29,7 @@ For each flag, the following precedence rules apply:
 `vvh-enable-addressbar-universal-flex-grow` \
 `vvh-disable-addressbar-universal-flex-grow`
 
-The width of individual components in the address bar grows to occupy free space in their row. This can also grow their click area.
+Individual components in the address bar are distributed evenly across the width of each row. If the title bar is shown, this can also grow their click area.
 
 Additionally, flexible spacers inside the address bar are hidden.
 
@@ -40,7 +40,7 @@ Additionally, flexible spacers inside the address bar are hidden.
 `vvh-enable-statusbar-universal-flex-grow` \
 `vvh-disable-statusbar-universal-flex-grow`
 
-The width of individual components in the status bar grows to occupy free space in their row. This can also grow their click area.
+Individual components in the status bar are distributed evenly across the width of each row. This can also grow their click area.
 
 Additionally, flexible spacers inside the status bar are hidden.
 

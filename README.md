@@ -11,12 +11,11 @@ Vivaldi VH is a CSS modification for [Vivaldi Browser](https://vivaldi.com) that
 
 ## Usage Notes
 
-Vivaldi VH has a built-in failsafe to prevent it from breaking horribly when the Pillar can't be properly constructed. The presence of title bar, address bar and a vertical tab bar are currently mandatory for this.
+Vivaldi VH has a built-in failsafe to prevent it from breaking when the Pillar can't be properly constructed. The presence of address bar and a vertical tab bar are currently mandatory for this.
 
 Vivaldi VH will only activate when all of the following are true:
 
 - Tab Bar Position is set to "Left" or "Right"
-- "Show Title Bar" is checked **OR** "Menu Position" is set to "Horizontal"
 - "Show Address Bar" is checked
 - "Show Tab Bar" is checked
 
@@ -28,11 +27,17 @@ Command Chain Flags allow you to customize Vivaldi VH right inside Vivaldi Brows
 
 [Click here](./documentation/command-chain-flags.md) for more information.
 
+## Command Chain Utilities
+
+Command Chain Utilities allow you to fine-tune the layout of your toolbars.
+
+[Click here](./documentation/command-chain-utilities.md) for more information.
+
 ## Roadmap
 
 Vivaldi VH will be updated regularly to ensure compatibility with the latest stable version of Vivaldi Browser. New functionality may also be added in the future.
 
-[Click here](./documentation/roadmap.md) for more information on planned updates and known issues.
+[Click here](./documentation/roadmap.md) for more information on planned features and known issues.
 
 ## Gallery
 
