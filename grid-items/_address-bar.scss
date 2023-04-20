@@ -7,6 +7,10 @@
   }
 
   #browser.disable-titlebar {
+    &.native:not(.mac) {
+      --vvh-address-bar-window-buttons-width: #{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} !important; //override OS specific styles of #browser.disable-titlebar
+    }
+
     #{variables.$select-address-bar} {
       background: linear-gradient(
           90deg,
@@ -212,13 +216,13 @@
 }
 
 @mixin universal-flex-grow {
-  #browser:not(.disable-titlebar) {
+  #browser:is(.native, :not(.disable-titlebar)) {
     #{variables.$select-address-bar} > * {
       flex-grow: 1;
     }
   }
 
-  #browser.disable-titlebar {
+  #browser.disable-titlebar:not(.native) {
     #{variables.$select-address-bar} {
       > * {
         margin-left: auto;
