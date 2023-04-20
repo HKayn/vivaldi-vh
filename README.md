@@ -6,14 +6,12 @@ Vivaldi VH is a CSS modification for [Vivaldi Browser](https://vivaldi.com) that
 
 ## Features
 
-- Looks good on any browser settings!
-- Can be customized right in the browser with [Command Chain Flags](./documentation/command-chain-flags.md)!
+- Adapts to any browser settings! If you move the tab bar to the right, so will the Pillar!
+- Customize the look and feel of Vivaldi VH right in the browser with [Command Chain Flags](./documentation/command-chain-flags.md) and [Command Chain Utilities](/documentation/command-chain-utilities.md)!
 
 ## Usage Notes
 
-Vivaldi VH has a built-in failsafe to prevent it from breaking when the Pillar can't be properly constructed. The presence of address bar and a vertical tab bar are currently mandatory for this.
-
-Vivaldi VH will only activate when all of the following are true:
+Vivaldi VH will only be applied when all of the following are true:
 
 - Tab Bar Position is set to "Left" or "Right"
 - "Show Address Bar" is checked
@@ -21,17 +19,14 @@ Vivaldi VH will only activate when all of the following are true:
 
 I recommend binding the "Show Tab Bar" setting to a keyboard shortcut or preparing a Command Chain that toggles this setting in case a website momentarily requires more horizontal space.
 
-## Command Chain Flags
+## Customizing Vivaldi VH
 
-Command Chain Flags allow you to customize Vivaldi VH right inside Vivaldi Browser, without modifying any CSS code.
+The look and feel of Vivaldi VH can be customized through [Command Chain Flags](/documentation/command-chain-flags.md) and [Command Chain Utilities](/documentation/command-chain-utilities.md) without having to modify any CSS code.
 
-[Click here](./documentation/command-chain-flags.md) for more information.
+For example, to disable the border around webpages:
 
-## Command Chain Utilities
-
-Command Chain Utilities allow you to fine-tune the layout of your toolbars.
-
-[Click here](./documentation/command-chain-utilities.md) for more information.
+1. [Create a Command Chain](https://help.vivaldi.com/desktop/shortcuts/command-chains/#Create_a_Command_Chain) with the name `vvh-disable-webpage-permanent-padding`.
+2. [Open the Toolbar Editor](https://help.vivaldi.com/desktop/appearance-customization/edit-toolbars/#Customize_toolbars) and select "Command Chains" from the dropdown. Grab your created Command Chain and drag it into one of your toolbars.
 
 ## Roadmap
 
@@ -46,5 +41,7 @@ Vivaldi VH will be updated regularly to ensure compatibility with the latest sta
 ![Vivaldi VH demo screenshot 3](documentation/images/demo-3.png)
 
 ![Vivaldi VH demo screenshot 4](documentation/images/demo-4.png)
+
+---
 
 Copyright (c) 2023 HKayn <https://hkayn.com>
