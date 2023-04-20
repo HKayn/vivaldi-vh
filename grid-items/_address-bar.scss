@@ -11,6 +11,12 @@
       --vvh-address-bar-window-buttons-width: #{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} !important; //override OS specific styles of #browser.disable-titlebar
     }
 
+    &:not(.native) {
+      #{variables.$select-address-bar} .toolbar-extensions > .button-toolbar {
+        margin: 0 auto;
+      }
+    }
+
     #{variables.$select-address-bar} {
       background: linear-gradient(
           90deg,
@@ -63,10 +69,6 @@
 
       .window-buttongroup {
         border-radius: 0 0 var(--radius) 0;
-      }
-
-      .toolbar-extensions > .button-toolbar {
-        margin: 0 auto;
       }
     }
 
