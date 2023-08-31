@@ -6,6 +6,19 @@
     height: auto;
   }
 
+  #browser:not(.disable-titlebar) {
+    &.color-behind-tabs-on {
+      #{variables.$select-address-bar} {
+        background-color: var(--colorBg);
+      }
+    }
+    &.color-behind-tabs-off {
+      #{variables.$select-address-bar} {
+        background-color: var(--colorAccentBg);
+      }
+    }
+  }
+
   #browser.disable-titlebar {
     &.native:not(.mac) {
       --vvh-address-bar-window-buttons-width: calc(#{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} + 12px) !important; // menu button gains 6px side margins & override OS specific styles of #browser.disable-titlebar
