@@ -8,7 +8,7 @@
 
   #browser.disable-titlebar {
     &.native:not(.mac) {
-      --vvh-address-bar-window-buttons-width: #{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} !important; //override OS specific styles of #browser.disable-titlebar
+      --vvh-address-bar-window-buttons-width: calc(#{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} + 12px) !important; // menu button gains 6px side margins & override OS specific styles of #browser.disable-titlebar
     }
 
     &:not(.native) {
@@ -64,11 +64,26 @@
 
       .vivaldi,
       .window-buttongroup {
+        position: absolute;
         scale: unset;
+      }
+
+      .vivaldi {
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
       }
 
       .window-buttongroup {
         border-radius: 0 0 var(--radius) 0;
+      }
+    }
+
+    &.theme-dark {
+      #{variables.$select-address-bar} {
+        .vivaldi:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
       }
     }
 
@@ -154,7 +169,7 @@
         }
 
         .window-buttongroup {
-          left: variables.$value-of-address-bar-height;
+          left: variables.$value-of-address-bar-menu-button-width-without-uizoomlevel;
           right: unset;
 
           > .window-close:hover {
