@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.2 (2023-08-31)
+
+### Fixes
+
+- When the title bar is disabled, the menu button in the address bar will no longer break out of its designated space.
+- When the title bar is enabled, the address bar will now have the correct background.
+
 ## v1.2.1 (2023-04-20)
 
 ### Fixes
