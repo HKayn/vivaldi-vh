@@ -7,8 +7,6 @@ $title-bar-min-height: calc(25px / var(--uiZoomLevel));
 
 $address-bar-height: 34px;
 $address-field-height: 24px;
-$address-bar-menu-button-width: calc(44px / var(--uiZoomLevel)); // This is intentionally being used over OS-specific widths
-$address-bar-menu-button-width-without-uizoomlevel: 44px;
 $extension-button-width: 34px;
 $extension-button-icon-width: 16px;
 
@@ -19,7 +17,6 @@ $webview-container-has-mosaic-padding: 2px;
 $mosaic-tile-margin: 4px;
 
 // OS-specific values
-$win-address-bar-menu-button-width: calc(46px / var(--uiZoomLevel));
 $win-address-bar-window-button-group-width: calc((46px * 3) / var(--uiZoomLevel));
 $win-address-bar-window-button-group-width-without-uizoomlevel: calc(46px * 3);
 

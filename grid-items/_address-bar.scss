@@ -20,8 +20,18 @@
   }
 
   #browser.disable-titlebar {
+    &:has(#{variables.$select-address-bar} .vivaldi .vivaldi-v) {
+      --vvh-address-bar-menu-button-width: 44px;
+    }
+
+    &:has(#{variables.$select-address-bar} .vivaldi .burger-icon) {
+      --vvh-address-bar-menu-button-width: 35px;
+    }
+
     &.native:not(.mac) {
-      --vvh-address-bar-window-buttons-width: calc(#{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} + 12px) !important; // menu button gains 6px side margins & override OS specific styles of #browser.disable-titlebar
+      --vvh-address-bar-window-buttons-width: calc(
+        var(--vvh-address-bar-menu-button-width) + 12px
+      ) !important; // menu button gains 6px side margins & override OS specific styles of #browser.disable-titlebar
     }
 
     &:not(.native) {
@@ -170,8 +180,7 @@
 
     &.win {
       --vvh-address-bar-window-buttons-width: calc(
-        #{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} +
-          #{variables.$value-of-win-address-bar-window-button-group-width-without-uizoomlevel} +
+        var(--vvh-address-bar-menu-button-width) + #{variables.$value-of-win-address-bar-window-button-group-width-without-uizoomlevel} +
           1px
       );
 
@@ -182,7 +191,7 @@
         }
 
         .window-buttongroup {
-          left: variables.$value-of-address-bar-menu-button-width-without-uizoomlevel;
+          left: var(--vvh-address-bar-menu-button-width);
           right: unset;
 
           > .window-close:hover {
@@ -219,8 +228,7 @@
     &.linux {
       --vvh-address-bar-window-buttons-width: calc(
         (
-            #{variables.$value-of-address-bar-menu-button-width-without-uizoomlevel} +
-              #{variables.$value-of-linux-window-button-group-width}
+            var(--vvh-address-bar-menu-button-width) + #{variables.$value-of-linux-window-button-group-width}
           ) + #{variables.$value-of-window-edge-distance}
       );
 
@@ -237,7 +245,7 @@
                   variables.$value-of-linux-window-button-group-height
               ) / 2
           );
-          left: variables.$value-of-address-bar-menu-button-width-without-uizoomlevel;
+          left: var(--vvh-address-bar-menu-button-width);
           right: unset;
         }
       }
@@ -261,7 +269,8 @@
 
       > .UrlBar-AddressField,
       > .UrlBar-SearchField,
-      > .SearchField { // .SearchField = mail search
+      > .SearchField {
+        // .SearchField = mail search
         margin-left: variables.$value-of-window-edge-distance;
         margin-right: variables.$value-of-window-edge-distance;
       }
