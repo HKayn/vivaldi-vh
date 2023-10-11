@@ -17,8 +17,8 @@
 
     #header,
     #main,
-    #main .mainbar,
-    #main .inner {
+    #main > .mainbar,
+    #main > .inner {
       display: contents;
     }
 
