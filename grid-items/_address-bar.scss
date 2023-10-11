@@ -260,7 +260,8 @@
       }
 
       > .UrlBar-AddressField,
-      > .UrlBar-SearchField {
+      > .UrlBar-SearchField,
+      > .SearchField { // .SearchField = mail search
         margin-left: variables.$value-of-window-edge-distance;
         margin-right: variables.$value-of-window-edge-distance;
       }
