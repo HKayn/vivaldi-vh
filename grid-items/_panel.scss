@@ -4,5 +4,9 @@
   #{variables.$select-panel} {
     max-width: unset;
     border-color: var(--colorBorder);
+    
+    // setting z-index 1 higher than the value in selector ".mainbar > .toolbar-mainbar from browser", 
+    // as to properly cover the address bar
+    z-index: 5;
   }
 }
