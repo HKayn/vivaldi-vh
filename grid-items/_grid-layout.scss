@@ -13,22 +13,36 @@
 
 @mixin styles {
   #browser {
-    display: grid;
-
-    #header,
-    #main,
-    #main > .mainbar,
-    #main > .inner {
-      display: contents;
+    // Workaround for visual artifacts on transparent Pillar sections with backdrop-filter (e.g. tab bar) below.
+    // These artifacts would appear whenver you intreracted with certain UI elements or hovered over certain elements on a website.
+    // Requires unsetting the backdrop-filter property on those transparent sections.
+    //
+    // This is likely related to this Chromium bug with the backdrop-filter property:
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=986206
+    //
+    // Some funny findings regarding this bug:
+    // * Unsetting mix-blend-mode OR backdrop-filter prevents the artifacts, or at least makes them far less likely.
+    // * When this #browser::before did not span the whole column, the artifacts continued appearing.
+    // (last observed on Vivaldi Browser 6.2)
+    
+    &::before {
+      content: "";
+      grid-row: 1/-1;
+      backdrop-filter: var(--backgroundBlur);
     }
 
-    #main .mainbar::before {
-      content: " ";
+    &.tabs-left::before {
+      grid-column: 1 / 2;
     }
 
-    #{variables.$select-panel},
-    #{variables.$select-webpage} {
-      grid-row: 1 / -1;
+    &.tabs-right::before {
+      grid-column: 3 / 4;
+    }
+
+    &:not(.is-settingspage).color-accent-from-page.color-behind-tabs-on.transparent-tabbar.tabs-left .tabbar-wrapper:before, // original selector from browser
+    &:not(.is-settingspage).color-accent-from-page.color-behind-tabs-on.transparent-tabbar.tabs-right .tabbar-wrapper:before, // original selector from browser
+    &.disable-titlebar .mainbar::before {
+      backdrop-filter: unset;
     }
 
     // Borders below
@@ -69,7 +83,25 @@
       border-top: 1px solid var(--colorBorder);
     }
 
-    // Grid placements below
+    // Grid setup below
+
+    display: grid;
+
+    #header,
+    #main,
+    #main > .mainbar,
+    #main > .inner {
+      display: contents;
+    }
+
+    #main .mainbar::before {
+      content: " ";
+    }
+
+    #{variables.$select-panel},
+    #{variables.$select-webpage} {
+      grid-row: 1 / -1;
+    }
 
     &.tabs-left {
       &:has(#{variables.$select-panel}.left) {
@@ -440,7 +472,20 @@
 
 @mixin panel-within-pillar {
   #browser {
+    &.tabs-left:has(#{variables.$select-panel}.left),
+    &.tabs-right:has(#{variables.$select-panel}.right) {
+      // disable backdrop-filter on the panel as part of the backdrop-filter workaround above
+      #switch {
+        backdrop-filter: unset;
+      }
+    }
+
     &.tabs-left:has(#{variables.$select-panel}.left) {
+      // part of the backdrop-filter workaround above
+      &::before {
+        grid-column: 1 / 3;
+      }
+
       #{variables.$select-title-bar},
       #{variables.$select-address-bar},
       #main .mainbar::before,
@@ -460,6 +505,11 @@
     }
 
     &.tabs-right:has(#{variables.$select-panel}.right) {
+      // part of the backdrop-filter workaround above 
+      &::before {
+        grid-column: 2 / 4;
+      }
+
       #{variables.$select-title-bar},
       #{variables.$select-address-bar},
       #main .mainbar::before,

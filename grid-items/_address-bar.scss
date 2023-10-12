@@ -110,9 +110,13 @@
       }
     }
 
+    /*
+    // Commented out to work around visual artifacts with backdrop-filter
+
     .mainbar::before {
       backdrop-filter: var(--backgroundBlur);
     }
+    */
 
     // window button colors below
 
