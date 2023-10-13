@@ -55,8 +55,11 @@
       z-index: 4; // replicates the z-index value set for the address bar by the browser. Makes the entire Pillar stack on top of the panel
     }
 
-    #{variables.$select-address-bar} {
-      z-index: 5; // prevents the address field dropdown from being stacked under other Pillar sections (e.g. bookmarks bar & tab bar)
+    #{variables.$select-address-bar},
+    #{variables.$select-footer-has-status-bar} {
+      &:has(#{variables.$select-toolbar-component-text-inputs}:focus) {
+        z-index: 5; // overrides z-index: 4 set in _grid-layout.scss to prevent the element's dropdown from being stacked under other Pillar sections (e.g. bookmarks bar & tab bar)
+      }
     }
 
     // Borders below
