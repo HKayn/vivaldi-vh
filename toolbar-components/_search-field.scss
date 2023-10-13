@@ -10,13 +10,6 @@
       )
       variables.$value-of-window-edge-distance;
     flex: 1 1 100%;
-
-    // TODO: Remove this when Vivaldi 5.8 reaches stable.
-    // This fixes some elements in the address bar stacking above the address field and search field dropdown options.
-    z-index: 5;
-    &:has(.OmniDropdown) {
-      z-index: 6;
-    }
   }
 }
 

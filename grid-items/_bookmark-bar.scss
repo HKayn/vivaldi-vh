@@ -10,10 +10,4 @@
       inset: 0;
     }
   }
-
-  // TODO: Remove this when Vivaldi 5.8 reaches stable.
-  // This fixes the tab bar stacking over the bookmark bar when the bookmark bar position is set to "bottom".
-  #browser.bookmark-bar-bottom #{variables.$select-bookmark-bar} .observer {
-    z-index: 1;
-  }
 }

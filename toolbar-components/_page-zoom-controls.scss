@@ -3,11 +3,5 @@
     &:has(.page-zoom-controls) {
       justify-content: center;
     }
-
-    // TODO: Remove this when Vivaldi 5.8 reaches stable.
-    // This fixes an unintended border around the page zoom element inside the address bar.
-    > .page-zoom-controls:before {
-      display: none;
-    }
   }
 }
