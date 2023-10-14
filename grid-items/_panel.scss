@@ -4,5 +4,9 @@
   #{variables.$select-panel} {
     max-width: unset;
     border-color: var(--colorBorder);
+
+    &.overlay {
+      position: static; // overrides position: absolute on #panels-container.overlay set by the browser
+    }
   }
 }

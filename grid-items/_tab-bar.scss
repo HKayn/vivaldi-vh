@@ -1,0 +1,11 @@
+@use "../variables";
+
+@mixin styles {
+  :has(#{variables.$select-panel}.overlay:not(.minimized).button) {
+    #{variables.$select-tab-bar} {
+      margin: 0;
+      // overrides margins set by the browser for #panels-container.overlay:not(.minimized).button + div and similar selectors
+      // which add margins to the tab bar in anticipation of an absolutely positioned panel toggle
+    }
+  }
+}
