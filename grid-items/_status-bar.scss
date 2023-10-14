@@ -2,8 +2,6 @@
 
 @mixin styles {
   #{variables.$select-footer-has-status-bar} {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-
     &:after {
       content: none;
     }
