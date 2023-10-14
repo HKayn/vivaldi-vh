@@ -64,6 +64,10 @@
 
     // Borders below
 
+    &.native {
+      border-top: 1px solid var(--colorBorder);
+    }
+    
     #{variables.$select-address-bar},
     #{variables.$select-bookmark-bar},
     #{variables.$select-footer-has-status-bar} {
