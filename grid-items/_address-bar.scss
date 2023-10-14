@@ -28,10 +28,16 @@
       --vvh-address-bar-menu-button-width: 35px;
     }
 
-    &.native:not(.mac) {
-      --vvh-address-bar-window-buttons-width: calc(
-        var(--vvh-address-bar-menu-button-width) + 12px
-      ) !important; // menu button gains 6px side margins & override OS specific styles of #browser.disable-titlebar
+    &.native {
+      &:not(.mac) {
+        --vvh-address-bar-window-buttons-width: var(
+          --vvh-address-bar-menu-button-width
+        ) !important; // override OS specific styles of #browser.disable-titlebar
+      }
+
+      .vivaldi {
+        margin: 0; // overrides margin: 0 6px set by browser
+      }
     }
 
     &:not(.native) {
