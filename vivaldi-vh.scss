@@ -68,8 +68,7 @@
   }
 
   @include variables.mixin-bind-command-chain-flag(
-    "searchfield-extend-on-focus",
-    true
+    "searchfield-extend-on-focus"
   ) {
     @include toolbar-components.search-field-extend-on-focus;
   }
