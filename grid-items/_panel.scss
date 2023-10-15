@@ -6,7 +6,8 @@
     border-color: var(--colorBorder);
 
     &.overlay {
-      position: static; // overrides position: absolute on #panels-container.overlay set by the browser
+      position: relative; // overrides position: absolute on #panels-container.overlay set by the browser
+      inset: 0;
     }
   }
 }
