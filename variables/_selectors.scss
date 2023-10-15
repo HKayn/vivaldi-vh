@@ -9,7 +9,7 @@ $title-bar-menu-position-horizontal: "#header .topmenu";
 $address-bar: "#main .toolbar-mainbar";
 $bookmark-bar: "#main .bookmark-bar";
 $panel: "#panels-container";
-$tab-bar: "#main .tabbar-wrapper";
+$tab-bar: "#main > .inner > .tabbar-wrapper";
 $footer-has-status-bar: "footer:has(.toolbar-statusbar)"; // This cannot be nested within another :has()
 $webpage: "#webview-container";
 
