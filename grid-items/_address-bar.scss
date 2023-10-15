@@ -265,7 +265,7 @@
 
 @mixin universal-flex-grow {
   #browser:is(.native, :not(.disable-titlebar)) {
-    #{variables.$select-address-bar} > * {
+    #{variables.$select-address-bar} > :not(#{variables.$select-mail-search}) { // exclude toolbar components with set width or flex-basis
       flex-grow: 1;
     }
   }

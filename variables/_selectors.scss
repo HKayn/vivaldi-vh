@@ -22,6 +22,10 @@ $toolbar-editor-modal: "#modal-bg.toolbar-editor";
 $flexible-space: ".toolbar-spacer-flexible";
 $address-field-text-input: "#urlFieldInput";
 $search-field-text-input: ".vivaldi-searchfield.searchfield-input";
+$mail-search: ".SearchField:not(.UrlBar-SearchField)";
+
+// Command Chain Utilities
+$toolbar-linebreak: "#{$command-chain-toolbar-component}:has(> button[title^=vvh-insert-linebreak])";
 
 // Combined variables
 $editable-toolbars: "#{$address-bar}, #{$panel}, #{$status-bar}";

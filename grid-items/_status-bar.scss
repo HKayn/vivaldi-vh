@@ -26,7 +26,7 @@
 
 @mixin universal-flex-grow {
   #{variables.$select-status-bar} {
-    > * {
+    > :not(#{variables.$select-mail-search}) { // exclude toolbar components with set width or flex-basis
       flex-grow: 1;
     }
 

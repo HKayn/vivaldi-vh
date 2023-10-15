@@ -1,7 +1,7 @@
 @use "../variables";
 
 @mixin styles {
-  .SearchField:not(.UrlBar-SearchField) {
+  #{variables.$select-mail-search} {
     margin: calc(
         calc(
             variables.$value-of-address-bar-height -
@@ -9,11 +9,15 @@
           ) / 2
       )
       variables.$value-of-window-edge-distance;
-		margin-right: variables.$value-of-window-edge-distance !important; // override inline margin-right: 6px
-    flex: 1 1 100%;
+    margin-right: variables.$value-of-window-edge-distance !important; // override inline margin-right: 6px
 
     .UrlBar-UrlFieldWrapper {
       min-width: unset;
     }
+  }
+
+  #{variables.$select-toolbar-linebreak} + #{variables.$select-mail-search}:has(+ #{variables.$select-command-chain-toolbar-component} > button[title^=vvh-insert-linebreak]
+    ) {
+    flex: 1 1 100%;
   }
 }
