@@ -1,7 +1,7 @@
 @use "../variables";
 
 @mixin styles {
-  .SearchField {
+  .SearchField:not(.UrlBar-SearchField) {
     margin: calc(
         calc(
             variables.$value-of-address-bar-height -
