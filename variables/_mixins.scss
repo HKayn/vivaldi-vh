@@ -52,6 +52,22 @@
   }
 }
 
+@mixin fade-in-on-hover {
+  animation: 0.5s linear fadeInOnHover;
+
+  @keyframes fadeInOnHover {
+    0% {
+      opacity: 0;
+    }
+    99% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
 $-command-chain-flag-namespace: "vvh-";
 $-command-chain-flag-prefix-enable: "#{$-command-chain-flag-namespace}enable-";
 $-command-chain-flag-prefix-disable: "#{$-command-chain-flag-namespace}disable-";

@@ -45,6 +45,44 @@
       backdrop-filter: unset;
     }
 
+    // tab bar styles for horizontal menu below
+
+    &:has(#{variables.$select-title-bar-menu-position-horizontal}) {
+      #{variables.$select-tab-bar} {
+        #tabs-tabbar-container {
+          width: 100% !important; 
+          // normally the tab bar can't be resized to be as wide as the horizontal menu,
+          // this closes any gaps caused by this
+
+          > .SlideBar {
+            cursor: not-allowed;
+            // indicate that the tab bar can't be resized in this state,
+            // since it normally can't be this wide in the first place
+
+            &:hover {
+              &::before {
+                content: "The tab bar cannot be resized while \"Menu Position\" is set to \"Horizontal\".";
+                text-align: start;
+                width: 217px; // chosen to achieve desired text wrapping
+                color: var(--colorFg);
+                background: var(--colorBg);
+                padding: 8px;
+                border: 1px solid var(--colorBorder);
+                border-radius: var(--radius);
+                box-shadow: 0 0 8px 2px var(--colorBorder);
+                margin: 8px;
+                position: absolute;
+                top: 0;
+                cursor: auto;
+  
+                @include variables.mixin-fade-in-on-hover;
+              }
+            }
+          }
+        }
+      }
+    }
+
     // z-index fix below
 
     #{variables.$select-title-bar},
