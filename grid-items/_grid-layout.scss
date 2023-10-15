@@ -82,22 +82,17 @@
         }
       }
     }
-
+    
     // z-index fix below
 
-    #{variables.$select-title-bar},
-    #{variables.$select-title-bar-menu-position-horizontal},
-    #main .mainbar::before,
-    #{variables.$select-bookmark-bar},
-    #{variables.$select-tab-bar},
-    #{variables.$select-footer-has-status-bar} {
-      z-index: 4; // replicates the z-index value set for the address bar by the browser. Makes the entire Pillar stack on top of the panel
+    #{variables.$select-panel} {
+      z-index: 5; // sets z-index 1 higher than the value set for the address bar by the browser
     }
 
     #{variables.$select-address-bar},
     #{variables.$select-footer-has-status-bar} {
-      &:has(#{variables.$select-toolbar-component-text-inputs}:focus) {
-        z-index: 5; // overrides z-index: 4 set in _grid-layout.scss to prevent the element's dropdown from being stacked under other Pillar sections (e.g. bookmarks bar & tab bar)
+      &:has(:is(#{variables.$select-toolbar-component-text-inputs}):focus) {
+        z-index: 6; // sets the z-index 1 higher than the value set for the panel
       }
     }
 
