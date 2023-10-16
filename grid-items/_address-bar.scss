@@ -34,10 +34,6 @@
           --vvh-address-bar-menu-button-width
         ) !important; // override OS specific styles of #browser.disable-titlebar
       }
-
-      .vivaldi {
-        margin: 0; // overrides margin: 0 6px set by browser
-      }
     }
 
     &:not(.native) {
@@ -98,6 +94,8 @@
       }
 
       .vivaldi {
+        margin: 0 !important; // overrides margin: 0 6px set by browser & overrides margins set by addressbar-universal-flex-grow
+        
         &:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
