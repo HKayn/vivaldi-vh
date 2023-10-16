@@ -6,20 +6,18 @@ This document contains all information regarding future changes and known issues
 
 The following will be added to Vivaldi VH in the future, in no particular order:
 
-- [Panel at full height behind a Command Chain Flag](./command-chain-flags.md#coming-soon-panel-at-full-height).
+- Allow activation of Vivaldi VH when "Show Tab Bar" is unchecked. The panel will then need to be enabled, as it takes its place.
 - Allow activation of Vivaldi VH when "Show Address Bar" is unchecked.
-- A "Zen Mode" where the webpage takes up the entire browser window, with the Pillar and panel floating in from the sides on demand
+- A Command Chain Flag to let the title bar span the entire window width.
+- A "Zen Mode" where the webpage takes up the entire browser window, with the Pillar and panel floating in from the sides on demand.
 - One-time-use JS modification that adds all available Command Chain Flags as Command Chains.
-- Ongoing updates to maintain compatibility with the latest stable Version of Vivaldi Browser.
+- Ongoing updates to maintain compatibility with the latest stable version of Vivaldi Browser.
 
 ## Considerations
 
 The following are being considered to be added to Vivaldi VH, but have blockers that need to be resolved first:
 
-- Allow activation of Vivaldi VH when "Show Tab Bar" is unchecked. The Pillar will be constructed using the panel instead. When the tab bar is not shown, setting panels to be non-floating will be mandated for Vivaldi VH to be active. Since this introduces an additional mandated setting, this will be behind a Command Chain Flag and disabled by default.
-  - How should Vivaldi VH behave when the panel is closed? Gaps in the pillar cause erroneous behaviour across the board, and disabling Vivaldi VH entirely whenver a panel is closed would make for a jarring experience. Assume that there is no tab bar.
-
-I appreciate any opinions that might help solve the listed issues!
+- None at the moment!
 
 ## Requesting new features
 
@@ -36,3 +34,5 @@ When developing Vivaldi VH, I try to hold myself to these values, listed in orde
 - Loading a webpage may stretch the Pillar if it contains an address field that's narrower than approx. `254px`.
 - Toolbar components cannot be removed by dragging them to the area between the toolbar and toolbar editor window.
 - Toolbar component styling is partly applied to demo toolbars inside the toolbar editor window.
+- When the panel does not touch the left or right window edge, panel resizing will behave in unexpected ways, but still be fully functional.
+- When the panel does not touch the left or right window edge, the "Add Web Panel" popup will be slightly misplaced, but still fully functional.

@@ -9,7 +9,7 @@ Vivaldi VH is a CSS modification for [Vivaldi Browser](https://vivaldi.com) that
 - Adapts to any browser settings! If you move the tab bar to the right, so will the Pillar!
 - Customize the look and feel of Vivaldi VH right in the browser with [Command Chain Flags](./documentation/command-chain-flags.md) and [Command Chain Utilities](/documentation/command-chain-utilities.md)!
 
-## Usage Notes
+## Requirements
 
 Vivaldi VH will only be applied when all of the following are true:
 
@@ -41,6 +41,10 @@ Vivaldi VH will be updated regularly to ensure compatibility with the latest sta
 ![Vivaldi VH demo screenshot 3](documentation/images/demo-3.png)
 
 ![Vivaldi VH demo screenshot 4](documentation/images/demo-4.png)
+
+![Vivaldi VH demo screenshot 5](documentation/images/demo-5.png)
+
+![Vivaldi VH demo screenshot 6](documentation/images/demo-6.png)
 
 ---
 

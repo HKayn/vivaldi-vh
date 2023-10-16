@@ -16,4 +16,8 @@ You can set up Command Chain Utilities for specific features by following the st
 
 `vvh-insert-linebreak`
 
-This can be placed between toolbar components that would normally fit on the same row to move them to separate rows.
+When placed in a toolbar, this will move all toolbar components after it to a new row.
+
+Special interactions:
+
+- If a Toolbar Linebreak is placed immediately before and after a mail search toolbar component, that search bar will grow to take up the full width of the toolbar that contains it.

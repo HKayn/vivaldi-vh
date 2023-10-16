@@ -1,5 +1,40 @@
 # Changelog
 
+## v1.3.0 (2023-10-16)
+
+### Changes
+
+- The panel is no longer incorporated into the Pillar by default.
+  - *This will surprise some people who update their Vivaldi VH installation, and because of that this was not an easy choice to make.* \
+ \
+*On a newly created browser profile, panels do not float by default. This means that with Vivaldi VH active, if the panel is on the same side as the Pillar, opening a panel will stretch the Pillar, which is arguably a more jarring experience than if it just squished the webpage. Thus the decision has been made to no longer incorporate the panel into the Pillar by default.* \
+ \
+*The previous behaviour can be restored with a Command Chain Flag.*
+
+- The Command Chain Flag `vvh-enable-panel-in-pillar` is now available, which restores the previous panel behaviour.
+- The search field can now be resized, and will no longer extend on focus by default.
+  - *I actually didn't know that the search field could be resized. That capability has been restored and you can now resize it in Vivaldi VH just as you would normally by grabbing the hidden handle at its left edge.* \
+ \
+*As a result, it will no longer extend on focus by default, since that would displace toolbar components on toolbars where the search field does not take up an entire row. This can be reenabled by placing the Command Chain Flag `vvh-enable-searchfield-extend-on-focus`.*
+- Borders have been added, some of which were erroneously missing, to distinguish different parts of the UI, such as the address bar and bookmarks bar.
+- Documentation and demo images have been updated. New demo images have been added.
+- Unused source code has been removed.
+
+### Fixes
+
+- Fixed the margins on the Mail Search toolbar component.
+- The selection indicator on the current tab is no longer invisible. Thanks [ppgm](https://forum.vivaldi.net/user/ppgm) for reporting this!
+- When the menu button is located in the address bar and the chosen Menu Icon Style is "Menu Icon", it will no longer take up more space than necessary.
+- Cleaned up margins of the menu button in the address bar.
+- Fixed cases of visual artifacts on a transparent tab bar.
+- Fixed a case where the panel wouldn't cover the address bar correctly.
+- Fixed cases where an address field or search field inside the panel would disappear if clicked on.
+
+### Known Issues
+
+- When the panel does not touch the left or right window edge, panel resizing will behave weirdly, but still be fully functional.
+- When the panel does not touch the left or right window edge, the "Add Web Panel" popup will be slightly misplaced, but still fully functional.
+
 ## v1.2.2 (2023-08-31)
 
 ### Fixes
