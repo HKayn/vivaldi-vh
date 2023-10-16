@@ -2,6 +2,10 @@
 
 @mixin styles {
   .UrlBar-SearchField {
+    z-index: 2;
+    // sets z-index 1 higher than badges of extensions toolbar component,
+    // so they don't show through the dropdown
+
     margin: calc(
         calc(
             variables.$value-of-address-bar-height -
@@ -9,6 +13,12 @@
           ) / 2
       )
       variables.$value-of-window-edge-distance;
+
+    &:has(.OmniDropdown) {
+      z-index: 3;
+      // sets z-index 1 higher than previously set when the dropdown is visible,
+      // so the dropdown of this search field doesn't get covered by other address or search fields when focused
+    }
   }
 }
 
