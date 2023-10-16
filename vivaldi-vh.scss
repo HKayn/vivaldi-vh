@@ -80,8 +80,8 @@
   }
 
   @include variables.mixin-bind-command-chain-flag(
-    "panel-within-pillar"
+    "panel-in-pillar"
   ) {
-    @include grid-items.grid-layout-panel-within-pillar;
+    @include grid-items.grid-layout-panel-in-pillar;
   }
 }

@@ -487,7 +487,7 @@
   }
 }
 
-@mixin panel-within-pillar {
+@mixin panel-in-pillar {
   #browser {
     &.tabs-left:has(#{variables.$select-panel}.left) {
       // part of the backdrop-filter workaround above
