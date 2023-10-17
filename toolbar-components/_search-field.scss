@@ -6,6 +6,11 @@
     // sets z-index 1 higher than badges of extensions toolbar component,
     // so they don't show through the dropdown
 
+    width: 0;
+    // overrides width: var(--SearchFieldWidth) set by the browser.
+    // removing this property renders the width of the search field stuck
+    // at 228px in the address bar and 166px in the status bar for some reason
+    
     margin: calc(
         calc(
             variables.$value-of-address-bar-height -
