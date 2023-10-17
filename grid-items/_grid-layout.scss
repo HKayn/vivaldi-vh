@@ -45,7 +45,7 @@
       backdrop-filter: unset;
     }
     
-    // z-index fix below
+    // z-index fixes for grid items below
 
     #{variables.$select-panel} {
       z-index: 5; // sets z-index 1 higher than the value set for the address bar by the browser
@@ -56,6 +56,13 @@
       &:has(:is(#{variables.$select-toolbar-component-text-inputs}):focus) {
         z-index: 6; // sets the z-index 1 higher than the value set for the panel
       }
+    }
+
+    #main .mainbar::before {
+      z-index: 0;
+      // without this, a blurry outline bleeds down from under the address bar into a gap left by a narrow tab bar when:
+      // * "Show Title Bar" and "Transparent Tab Bar" are disabled
+      // * "Accent on Window is enabled"
     }
 
     // Borders below
