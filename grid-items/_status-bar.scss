@@ -33,6 +33,16 @@
       flex-grow: 1;
     }
 
+    > .workspace-popup {
+      max-width: unset;
+
+      > .ToolbarButton-Button {
+        .button-icon + .button-toolbar-menu-indicator {
+          margin-left: 0;
+        }
+      }
+    }
+
     .button-toolbar button:hover {
       background-color: var(--colorBgDark);
     }

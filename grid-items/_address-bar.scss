@@ -95,7 +95,7 @@
 
       .vivaldi {
         margin: 0 !important; // overrides margin: 0 6px set by browser & overrides margins set by addressbar-universal-flex-grow
-        
+
         &:hover {
           background-color: rgba(0, 0, 0, 0.1);
         }
@@ -263,11 +263,24 @@
 
 @mixin universal-flex-grow {
   #browser:is(.native, :not(.disable-titlebar)) {
-    #{variables.$select-address-bar} > :not(
-      #{variables.$select-search-field},
-      #{variables.$select-mail-search}
-    ) { // exclude toolbar components with set width or flex-basis
-      flex-grow: 1;
+    #{variables.$select-address-bar} {
+      > :not(
+          #{variables.$select-search-field},
+          #{variables.$select-mail-search}
+        ) {
+        // exclude toolbar components with set width or flex-basis
+        flex-grow: 1;
+      }
+
+      > .workspace-popup {
+        max-width: unset;
+
+        > .ToolbarButton-Button {
+          .button-icon + .button-toolbar-menu-indicator {
+            margin-left: 0;
+          }
+        }
+      }
     }
   }
 
