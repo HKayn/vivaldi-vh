@@ -24,6 +24,10 @@
     .UrlBar-UrlFieldWrapper {
       min-width: unset;
     }
+
+    > .toolbar {
+      padding-left: 0 !important; // overrides padding added by the browser on native windows, which appears to be by mistake
+    }
   }
 }
 
