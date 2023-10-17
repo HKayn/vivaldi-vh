@@ -26,9 +26,23 @@
       }
     }
   }
+
+  $transition-duration: 0.2s;
+  
+  #{selectors.$address-bar},
+  #{selectors.$footer-has-status-bar} {
+    &:has(#{$element} #{$text-input}) {
+      transition: z-index 0s #{$transition-duration}; // delays z-index change in _grid-layout.scss by the transition duration
+    }
+
+    &:has(#{$element} #{$text-input}:focus) {
+      transition: z-index 0s 0s;
+    }
+  }
+
   #{$element} {
-    transition: margin cubic-bezier(0, 1, 0.25, 1) 0.2s,
-      flex-basis cubic-bezier(0, 1, 0.25, 1) 0.2s;
+    transition: margin cubic-bezier(0, 1, 0.25, 1) #{$transition-duration},
+      flex-basis cubic-bezier(0, 1, 0.25, 1) #{$transition-duration};
 
     &:has(#{$text-input}:focus) {
       flex-basis: 100vw !important;
