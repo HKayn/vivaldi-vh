@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.3.1 (2023-10-18)
+
+### Changes
+
+- The size of the URL obfuscation warning has been slightly adjusted.
+  - *This essentially changes its padding to be in line with the other elements inside the toolbar of the address field.*
+
+### Fixes
+
+- When the address field and the search field extend on focus, they will no longer be covered by the panel while they retract.
+- When "Show Title Bar" or "Use Native Window" is enabled, the Workspaces toolbar component will now grow correctly inside the address bar and status bar.
+  - *As a reminder: By default, when "Show Title Bar" or "Use Native Window" is enabled, toolbar components grow in width to take up free space on the address bar and status bar.*
+- Removed an erroneous padding in the address field toolbar when "Use Native Window" is enabled.
+- Fixed an issue that caused the minimum width of the search bar to be larger than expected.
+- Fixed an issue that would cause a blurry colored outline to appear below the address bar.
+
+---
+
 ## v1.3.0 (2023-10-16)
 
 ### Changes
