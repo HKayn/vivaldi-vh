@@ -13,6 +13,13 @@
 @use "toolbar-components";
 @use "ui-elements";
 
+:root {
+  /* Set a minimum width for the Pillar: */
+  --vvh-pillar-min-width: 0px;
+  /* Set a custom width for toolbar components that extend on focus: */
+  --vvh-extend-on-focus-width: 1200px;
+}
+
 :root:has(#{variables.$select-browser-with-valid-settings}) {
   @include variables.custom-properties-declare;
 

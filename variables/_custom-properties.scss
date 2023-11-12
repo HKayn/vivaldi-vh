@@ -20,14 +20,14 @@
     &.tabs-right:has(#{select.$panel}.right),
     &.tabs-off {
       --vvh-input-field-extend-on-focus-margin: calc(
-        max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
+        max(100% - var(--vvh-extend-on-focus-width), 100% - 100vw) + #{value-of.$window-edge-distance}
       ) !important;
     }
 
     &.tabs-left:has(#{select.$panel}.right),
     &.tabs-right:has(#{select.$panel}.left) {
       --vvh-input-field-extend-on-focus-margin: calc(
-        max(100% - 1200px, 100% - 100vw) +
+        max(100% - var(--vvh-extend-on-focus-width), 100% - 100vw) +
           calc(#{value-of.$window-edge-distance} + var(--vvh-input-field-extend-on-focus-margin-offset))
       ) !important;
     }

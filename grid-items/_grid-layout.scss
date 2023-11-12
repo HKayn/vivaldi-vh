@@ -227,13 +227,13 @@
     grid-template-columns:
       repeat(
         calc(0 + var(--vvh-grid-pillar-left, 0)),
-        min-content
+        minmax(var(--vvh-pillar-min-width, min-content), min-content)
       )
       repeat(calc(0 + var(--vvh-grid-panel-left, 0)), min-content)
       1fr repeat(calc(0 + var(--vvh-grid-panel-right, 0)), min-content)
       repeat(
         calc(0 + var(--vvh-grid-pillar-right, 0)),
-        min-content
+        minmax(var(--vvh-pillar-min-width, min-content), min-content)
       );
 
     &.tabs-left {
