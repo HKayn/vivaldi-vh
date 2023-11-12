@@ -4,7 +4,8 @@
 
 @mixin extend-on-focus($element, $text-input) {
   #browser {
-    &.tabs-left {
+    &.tabs-left,
+    &.tabs-off:has(#{selectors.$panel}.left) {
       #{selectors.$address-bar},
       #{selectors.$footer-has-status-bar} {
         #{$element}:has(#{$text-input}:focus) {
@@ -15,7 +16,8 @@
       }
     }
 
-    &.tabs-right {
+    &.tabs-right,
+    &.tabs-off:has(#{selectors.$panel}.right) {
       #{selectors.$address-bar},
       #{selectors.$footer-has-status-bar} {
         #{$element}:has(#{$text-input}:focus) {

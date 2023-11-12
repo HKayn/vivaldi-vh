@@ -1,7 +1,7 @@
 // This file contains selectors that can be reused and/or are in need of semantic meaning.
 
 // Settings check intended to act as a failsafe
-$browser-with-valid-settings: "#browser:is(.tabs-left, .tabs-right):is(.address-top, .address-bottom)";
+$browser-with-valid-settings: "#browser:is(.tabs-left, .tabs-right), #browser #panels-container";
 
 // Grid items
 $title-bar: "#titlebar";

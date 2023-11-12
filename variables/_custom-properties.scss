@@ -17,7 +17,8 @@
     }
 
     &.tabs-left:has(#{select.$panel}.left),
-    &.tabs-right:has(#{select.$panel}.right) {
+    &.tabs-right:has(#{select.$panel}.right),
+    &.tabs-off {
       --vvh-input-field-extend-on-focus-margin: calc(
         max(100% - 1200px, 100% - 100vw) + #{value-of.$window-edge-distance}
       ) !important;

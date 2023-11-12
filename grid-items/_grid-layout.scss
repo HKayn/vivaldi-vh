@@ -24,7 +24,7 @@
     // * Unsetting mix-blend-mode OR backdrop-filter prevents the artifacts, or at least makes them far less likely.
     // * When this #browser::before did not span the whole column, the artifacts continued appearing.
     // (last observed on Vivaldi Browser 6.2)
-    
+
     &::before {
       content: "";
       grid-row: 1/-1;
@@ -39,12 +39,14 @@
       grid-column: 3 / 4;
     }
 
-    &:not(.is-settingspage).color-accent-from-page.color-behind-tabs-on.transparent-tabbar.tabs-left .tabbar-wrapper:before, // original selector from browser
-    &:not(.is-settingspage).color-accent-from-page.color-behind-tabs-on.transparent-tabbar.tabs-right .tabbar-wrapper:before, // original selector from browser
+    &:not(.is-settingspage).color-accent-from-page.color-behind-tabs-on.transparent-tabbar.tabs-left .tabbar-wrapper:before,
+    // original selector from browser
+    &:not(.is-settingspage).color-accent-from-page.color-behind-tabs-on.transparent-tabbar.tabs-right .tabbar-wrapper:before,
+    // original selector from browser
     &.disable-titlebar .mainbar::before {
       backdrop-filter: unset;
     }
-    
+
     // z-index fixes for grid items below
 
     #{variables.$select-panel} {
@@ -70,7 +72,7 @@
     &.native {
       border-top: 1px solid var(--colorBorder);
     }
-    
+
     #{variables.$select-address-bar},
     #{variables.$select-bookmark-bar},
     #{variables.$select-footer-has-status-bar} {
@@ -122,373 +124,216 @@
       content: " ";
     }
 
+    grid-template-rows:
+      repeat(
+        calc(
+          0 + var(--vvh-grid-title-bar, 0) + var(--vvh-grid-address-bar-top, 0) +
+            var(--vvh-grid-bookmark-bar-top, 0)
+        ),
+        min-content
+      )
+      1fr repeat(
+        calc(
+          0 + var(--vvh-grid-bookmark-bar-bottom, 0) +
+            var(--vvh-grid-address-bar-bottom, 0) +
+            var(--vvh-grid-status-bar, 0)
+        ),
+        min-content
+      );
+
     #{variables.$select-panel},
     #{variables.$select-webpage} {
-      grid-row: 1 / -1;
+      grid-row: 1 / 9999; // the value "1 / -1" did not achieve the desired effect
     }
 
-    &.tabs-left {
-      &:has(#{variables.$select-panel}.left) {
-        grid-template-columns: min-content min-content 1fr;
+    &:not(.disable-titlebar) {
+      --vvh-grid-title-bar: 1;
 
-        #{variables.$select-title-bar},
-        #{variables.$select-address-bar},
-        #main .mainbar::before,
-        #{variables.$select-title-bar-menu-position-horizontal},
-        #{variables.$select-bookmark-bar},
-        #{variables.$select-footer-has-status-bar} {
-          grid-column: 1 / 2;
-        }
-
-        #{variables.$select-panel} {
-          grid-column: 2 / 3;
-        }
-
-        #{variables.$select-tab-bar} {
-          grid-column: 1 / 2;
-        }
-
-        #{variables.$select-webpage} {
-          grid-column: 3 / 4;
-        }
+      #{variables.$select-title-bar},
+      #{variables.$select-title-bar-menu-position-horizontal} {
+        grid-row: 1 / 2;
       }
+    }
 
-      &:has(#{variables.$select-panel}.right) {
-        grid-template-columns: min-content 1fr min-content;
+    &.address-top {
+      --vvh-grid-address-bar-top: 1;
 
-        #{variables.$select-title-bar},
-        #{variables.$select-address-bar},
-        #main .mainbar::before,
-        #{variables.$select-title-bar-menu-position-horizontal},
-        #{variables.$select-bookmark-bar},
-        #{variables.$select-footer-has-status-bar} {
-          grid-column: 1 / 2;
-        }
+      #{variables.$select-address-bar},
+      #main .mainbar::before {
+        grid-row: calc(1 + var(--vvh-grid-title-bar, 0)) /
+          calc(2 + var(--vvh-grid-title-bar, 0));
+      }
+    }
 
-        #{variables.$select-panel} {
-          grid-column: 3 / 4;
-        }
+    &.bookmark-bar-top {
+      --vvh-grid-bookmark-bar-top: 1;
 
-        #{variables.$select-tab-bar} {
-          grid-column: 1 / 2;
-        }
+      #{variables.$select-bookmark-bar} {
+        grid-row: calc(
+            1 + var(--vvh-grid-title-bar, 0) +
+              var(--vvh-grid-address-bar-top, 0)
+          ) /
+          calc(
+            2 + var(--vvh-grid-title-bar, 0) +
+              var(--vvh-grid-address-bar-top, 0)
+          );
+      }
+    }
 
-        #{variables.$select-webpage} {
-          grid-column: 2 / 3;
-        }
+    #{variables.$select-tab-bar} {
+      grid-row: calc(
+          1 + var(--vvh-grid-title-bar, 0) + var(--vvh-grid-address-bar-top, 0) +
+            var(--vvh-grid-bookmark-bar-top, 0)
+        ) /
+        calc(
+          -1 - var(--vvh-grid-bookmark-bar-bottom, 0) - var(
+              --vvh-grid-address-bar-bottom,
+              0
+            ) - var(--vvh-grid-status-bar, 0)
+        );
+    }
+
+    &.bookmark-bar-bottom {
+      --vvh-grid-bookmark-bar-bottom: 1;
+
+      #{variables.$select-bookmark-bar} {
+        grid-row: calc(
+            -2 - var(--vvh-grid-address-bar-bottom, 0) - var(--vvh-grid-status-bar, 0)
+          ) /
+          calc(
+            -1 - var(--vvh-grid-address-bar-bottom, 0) - var(--vvh-grid-status-bar, 0)
+          );
+      }
+    }
+
+    &.address-bottom {
+      --vvh-grid-address-bar-bottom: 1;
+
+      #{variables.$select-address-bar},
+      #main .mainbar::before {
+        grid-row: calc(-2 - var(--vvh-grid-status-bar, 0)) /
+          calc(-1 - var(--vvh-grid-status-bar, 0));
+      }
+    }
+
+    &:has(#{variables.$select-status-bar}) {
+      --vvh-grid-status-bar: 1;
+
+      #{variables.$select-status-bar} {
+        grid-row: -2 / -1;
+      }
+    }
+
+    grid-template-columns:
+      repeat(
+        calc(0 + var(--vvh-grid-pillar-left, 0)),
+        min-content
+      )
+      repeat(calc(0 + var(--vvh-grid-panel-left, 0)), min-content)
+      1fr repeat(calc(0 + var(--vvh-grid-panel-right, 0)), min-content)
+      repeat(
+        calc(0 + var(--vvh-grid-pillar-right, 0)),
+        min-content
+      );
+
+    &.tabs-left {
+      --vvh-grid-pillar-left: 1;
+
+      #{variables.$select-title-bar},
+      #{variables.$select-address-bar},
+      #main .mainbar::before,
+      #{variables.$select-title-bar-menu-position-horizontal},
+      #{variables.$select-bookmark-bar},
+      #{variables.$select-tab-bar},
+      #{variables.$select-footer-has-status-bar} {
+        grid-column: 1 / 2;
+      }
+    }
+
+    &:has(#{variables.$select-panel}.left) {
+      --vvh-grid-panel-left: 1;
+
+      #{variables.$select-panel} {
+        grid-column: calc(1 + var(--vvh-grid-pillar-left, 0)) /
+          calc(2 + var(--vvh-grid-pillar-left, 0));
+      }
+    }
+
+    #{variables.$select-webpage} {
+      grid-column: calc(
+          1 + var(--vvh-grid-pillar-left, 0) + var(--vvh-grid-panel-left, 0)
+        ) /
+        calc(
+          -1 - var(--vvh-grid-panel-right, 0) - var(--vvh-grid-pillar-right, 0)
+        );
+    }
+
+    &:has(#{variables.$select-panel}.right) {
+      --vvh-grid-panel-right: 1;
+
+      #{variables.$select-panel} {
+        grid-column: calc(-2 - var(--vvh-grid-pillar-right, 0)) /
+          calc(-1 - var(--vvh-grid-pillar-right, 0));
       }
     }
 
     &.tabs-right {
+      --vvh-grid-pillar-right: 1;
+
+      #{variables.$select-title-bar},
+      #{variables.$select-address-bar},
+      #main .mainbar::before,
+      #{variables.$select-title-bar-menu-position-horizontal},
+      #{variables.$select-bookmark-bar},
+      #{variables.$select-tab-bar},
+      #{variables.$select-footer-has-status-bar} {
+        grid-column: -2 / -1;
+      }
+    }
+
+    &.tabs-off {
       &:has(#{variables.$select-panel}.left) {
-        grid-template-columns: min-content 1fr min-content;
+        --vvh-grid-pillar-left: 1;
+        --vvh-grid-panel-left: 0;
 
         #{variables.$select-title-bar},
         #{variables.$select-address-bar},
         #main .mainbar::before,
         #{variables.$select-title-bar-menu-position-horizontal},
         #{variables.$select-bookmark-bar},
+        #{variables.$select-panel},
         #{variables.$select-footer-has-status-bar} {
-          grid-column: 3 / 4;
-        }
-
-        #{variables.$select-panel} {
           grid-column: 1 / 2;
-        }
-
-        #{variables.$select-tab-bar} {
-          grid-column: 3 / 4;
-        }
-
-        #{variables.$select-webpage} {
-          grid-column: 2 / 3;
         }
       }
 
       &:has(#{variables.$select-panel}.right) {
-        grid-template-columns: 1fr min-content min-content;
+        --vvh-grid-pillar-right: 1;
+        --vvh-grid-panel-right: 0;
 
         #{variables.$select-title-bar},
         #{variables.$select-address-bar},
         #main .mainbar::before,
         #{variables.$select-title-bar-menu-position-horizontal},
         #{variables.$select-bookmark-bar},
+        #{variables.$select-panel},
         #{variables.$select-footer-has-status-bar} {
-          grid-column: 3 / 4;
-        }
-
-        #{variables.$select-panel} {
-          grid-column: 2 / 3;
-        }
-
-        #{variables.$select-tab-bar} {
-          grid-column: 3 / 4;
-        }
-
-        #{variables.$select-webpage} {
-          grid-column: 1 / 2;
-        }
-      }
-    }
-
-    #{variables.$select-title-bar},
-    #{variables.$select-title-bar-menu-position-horizontal} {
-      grid-row: 1 / 2;
-    }
-
-    footer {
-      grid-row: -2 / -1;
-    }
-
-    &.disable-titlebar {
-      &.address-top {
-        &.bookmark-bar-top {
-          grid-template-rows: min-content min-content 1fr;
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 1 / 2;
-          }
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 3 / 4;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content min-content 1fr min-content;
-          }
-        }
-
-        &.bookmark-bar-bottom {
-          grid-template-rows: min-content 1fr min-content;
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 1 / 2;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 3 / 4;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content 1fr min-content min-content;
-          }
-        }
-
-        &.bookmark-bar-top-off,
-        &.bookmark-bar-bottom-off {
-          grid-template-rows: min-content 1fr;
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 1 / 2;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 2 / 3;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content 1fr min-content;
-          }
+          grid-column: -2 / -1;
         }
       }
 
-      &.address-bottom {
-        &.bookmark-bar-top {
-          grid-template-rows: min-content 1fr min-content;
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 1 / 2;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 3 / 4;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content 1fr min-content min-content;
-          }
-        }
-
-        &.bookmark-bar-bottom {
-          grid-template-rows: 1fr min-content min-content;
-
-          #{variables.$select-tab-bar} {
-            grid-row: 1 / 2;
-          }
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 3 / 4;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: 1fr min-content min-content min-content;
-          }
-        }
-
-        &.bookmark-bar-top-off,
-        &.bookmark-bar-bottom-off {
-          grid-template-rows: 1fr min-content;
-
-          #{variables.$select-tab-bar} {
-            grid-row: 1 / 2;
-          }
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 2 / 3;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: 1fr min-content min-content;
-          }
-        }
-      }
-    }
-
-    &:not(.disable-titlebar) {
-      &.address-top {
-        &.bookmark-bar-top {
-          grid-template-rows: min-content min-content min-content 1fr;
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 3 / 4;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 4 / 5;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content min-content min-content 1fr min-content;
-          }
-        }
-
-        &.bookmark-bar-bottom {
-          grid-template-rows: min-content min-content 1fr min-content;
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 3 / 4;
-          }
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 4 / 5;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content min-content 1fr min-content min-content;
-          }
-        }
-
-        &.bookmark-bar-top-off,
-        &.bookmark-bar-bottom-off {
-          grid-template-rows: min-content min-content 1fr;
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 3 / 4;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content min-content 1fr min-content;
-          }
-        }
-      }
-
-      &.address-bottom {
-        &.bookmark-bar-top {
-          grid-template-rows: min-content min-content 1fr min-content;
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-tab-bar} {
-            grid-row: 3 / 4;
-          }
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 4 / 5;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content min-content 1fr min-content min-content;
-          }
-        }
-
-        &.bookmark-bar-bottom {
-          grid-template-rows: min-content 1fr min-content min-content;
-
-          #{variables.$select-tab-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-bookmark-bar} {
-            grid-row: 3 / 4;
-          }
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 4 / 5;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content 1fr min-content min-content min-content;
-          }
-        }
-
-        &.bookmark-bar-top-off,
-        &.bookmark-bar-bottom-off {
-          grid-template-rows: min-content 1fr min-content;
-
-          #{variables.$select-tab-bar} {
-            grid-row: 2 / 3;
-          }
-
-          #{variables.$select-address-bar},
-          #main .mainbar::before {
-            grid-row: 3 / 4;
-          }
-
-          &:has(#{variables.$select-status-bar}) {
-            grid-template-rows: min-content 1fr min-content min-content;
-          }
-        }
+      #{variables.$select-panel} {
+        grid-row: calc(
+            1 + var(--vvh-grid-title-bar, 0) +
+              var(--vvh-grid-address-bar-top, 0) +
+              var(--vvh-grid-bookmark-bar-top, 0)
+          ) /
+          calc(
+            -1 - var(--vvh-grid-bookmark-bar-bottom, 0) - var(
+                --vvh-grid-address-bar-bottom,
+                0
+              ) - var(--vvh-grid-status-bar, 0)
+          );
       }
     }
   }
@@ -521,7 +366,7 @@
     }
 
     &.tabs-right:has(#{variables.$select-panel}.right) {
-      // part of the backdrop-filter workaround above 
+      // part of the backdrop-filter workaround above
       &::before {
         grid-column: 2 / 4;
       }
@@ -544,7 +389,6 @@
       }
     }
 
-    
     &.tabs-left:has(#{variables.$select-panel}.left),
     &.tabs-right:has(#{variables.$select-panel}.right) {
       // disable backdrop-filter on the panel as part of the backdrop-filter workaround above
@@ -559,13 +403,13 @@
               grid-row: 3 / 4;
             }
           }
-  
+
           &.bookmark-bar-bottom {
             #{variables.$select-panel} {
               grid-row: 2 / 3;
             }
           }
-  
+
           &.bookmark-bar-top-off,
           &.bookmark-bar-bottom-off {
             #{variables.$select-panel} {
@@ -573,20 +417,20 @@
             }
           }
         }
-  
+
         &.address-bottom {
           &.bookmark-bar-top {
             #{variables.$select-panel} {
               grid-row: 2 / 3;
             }
           }
-  
+
           &.bookmark-bar-bottom {
             #{variables.$select-panel} {
               grid-row: 1 / 2;
             }
           }
-  
+
           &.bookmark-bar-top-off,
           &.bookmark-bar-bottom-off {
             #{variables.$select-panel} {
@@ -595,7 +439,7 @@
           }
         }
       }
-  
+
       &:not(.disable-titlebar) {
         &.address-top {
           &.bookmark-bar-top {
@@ -603,13 +447,13 @@
               grid-row: 4 / 5;
             }
           }
-  
+
           &.bookmark-bar-bottom {
             #{variables.$select-panel} {
               grid-row: 3 / 4;
             }
           }
-  
+
           &.bookmark-bar-top-off,
           &.bookmark-bar-bottom-off {
             #{variables.$select-panel} {
@@ -617,20 +461,20 @@
             }
           }
         }
-  
+
         &.address-bottom {
           &.bookmark-bar-top {
             #{variables.$select-panel} {
               grid-row: 3 / 4;
             }
           }
-  
+
           &.bookmark-bar-bottom {
             #{variables.$select-panel} {
               grid-row: 2 / 3;
             }
           }
-  
+
           &.bookmark-bar-top-off,
           &.bookmark-bar-bottom-off {
             #{variables.$select-panel} {
