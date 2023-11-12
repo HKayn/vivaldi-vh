@@ -1,10 +1,16 @@
 @use "../variables";
 
 @mixin styles {
+  #{variables.$select-address-bar},
+  #{variables.$select-status-bar} {
+    .toolbar-extensions {
+      flex-basis: 100%;
+      display: grid;
+    }
+  }
+
   .toolbar-extensions {
-    flex-basis: 100%;
     box-sizing: border-box;
-    display: grid;
     grid-template-columns: repeat(
       auto-fit,
       minmax(variables.$value-of-extension-button-width, 1fr)
