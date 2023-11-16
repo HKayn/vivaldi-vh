@@ -1,7 +1,7 @@
 @use "../variables";
 
 @mixin styles {
-  #{variables.$select-address-bar},
+  #browser:is(.address-top, .address-bottom) #{variables.$select-address-bar},
   #{variables.$select-status-bar} {
     .toolbar-extensions {
       flex-basis: 100%;
