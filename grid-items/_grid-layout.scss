@@ -523,6 +523,11 @@
 
 @mixin title-bar-full-width {
   #browser:not(.disable-titlebar) {
+    #{variables.$select-title-bar} {
+      border-left: none;
+      border-right: none;
+    }
+
     &:is(.tabs-left, .tabs-right) {
       #{variables.$select-panel} {
         grid-row-start: 2;
