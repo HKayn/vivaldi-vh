@@ -7,6 +7,10 @@
     }
   }
 
+  @include variables.mixin-highlight-toolbar-component-in-toolbar-editor(
+    '#{variables.$select-command-chain-toolbar-component}:has(> button[title*="vvh-toggle-on"])'
+  );
+
   #browser:not(.toolbar-edit-mode)
     #{variables.$select-command-chain-toolbar-component} {
     &:has(> button[title^="vvh-insert-linebreak"]) {
@@ -16,14 +20,27 @@
         display: none;
       }
     }
-  }
 
-  @at-root :root:not(:has(#{variables.$select-browser-with-valid-settings}))
-    #browser:not(.toolbar-edit-mode)
-    #{variables.$select-command-chain-toolbar-component} {
-    &:has(> button[title^="vvh-insert-linebreak"]) {
+    &:has(> button[title*="vvh-toggle-on"]) {
       display: none;
     }
+  }
+
+  @at-root :root:not(:has(#{variables.$select-browser-with-valid-settings})) {
+    #browser:not(.toolbar-edit-mode)
+      #{variables.$select-command-chain-toolbar-component} {
+      &:has(> button[title^="vvh-insert-linebreak"]) {
+        display: none;
+      }
+
+      &:has(> button[title*="vvh-toggle-off"]) {
+        display: none;
+      }
+    }
+
+    @include variables.mixin-highlight-toolbar-component-in-toolbar-editor(
+      '#{variables.$select-command-chain-toolbar-component}:has(> button[title*="vvh-toggle-off"])'
+    );
   }
 
   #browser.toolbar-edit-mode
