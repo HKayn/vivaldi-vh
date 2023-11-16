@@ -10,4 +10,17 @@
       inset: 0;
     }
   }
+
+  #browser.tabs-off #{variables.$select-panel} {
+    // The panel is inside the Pillar.
+    // The following styles make it as difficult as possible to close the panel.
+
+    .button-toolbar.active {
+      pointer-events: none;
+    }
+
+    .panel .close {
+      display: none;
+    }
+  }
 }
