@@ -37,6 +37,10 @@
       }
     }
   }
+
+  #browser:is(.address-top-off, .address-bottom-off) .UrlBar-AddressField {
+    width: calc(100% - (2 * variables.$value-of-window-edge-distance));
+  }
 }
 
 @mixin extend-on-focus {
@@ -44,4 +48,19 @@
     ".UrlBar-AddressField",
     "#urlFieldInput"
   );
+
+  #browser:is(.address-top-off, .address-bottom-off) {
+    &.tabs-left:has(#{variables.$select-panel}.right),
+    &.tabs-right:has(#{variables.$select-panel}.left) {
+      .UrlBar-AddressField {
+        width: calc(var(--vvh-extend-on-focus-width, 1200px) - ((2 * variables.$value-of-window-edge-distance) + var(--vvh-input-field-extend-on-focus-margin-offset)));
+        max-width: calc(100vw - ((2 * variables.$value-of-window-edge-distance) + var(--vvh-input-field-extend-on-focus-margin-offset)));
+      }
+    }
+
+    .UrlBar-AddressField {
+      width: calc(var(--vvh-extend-on-focus-width, 1200px) - (2 * variables.$value-of-window-edge-distance));
+      max-width: calc(100vw - (2 * variables.$value-of-window-edge-distance));
+    }
+  } 
 }
