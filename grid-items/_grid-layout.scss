@@ -125,21 +125,8 @@
     }
 
     grid-template-rows:
-      repeat(
-        calc(
-          0 + var(--vvh-grid-title-bar, 0) + var(--vvh-grid-address-bar-top, 0) +
-            var(--vvh-grid-bookmark-bar-top, 0)
-        ),
-        min-content
-      )
-      1fr repeat(
-        calc(
-          0 + var(--vvh-grid-bookmark-bar-bottom, 0) +
-            var(--vvh-grid-address-bar-bottom, 0) +
-            var(--vvh-grid-status-bar, 0)
-        ),
-        min-content
-      );
+      repeat(3, min-content)
+      1fr repeat(3, min-content);
 
     #{variables.$select-panel},
     #{variables.$select-webpage} {
@@ -224,17 +211,48 @@
       }
     }
 
-    grid-template-columns:
-      repeat(
-        calc(0 + var(--vvh-grid-pillar-left, 0)),
-        minmax(var(--vvh-pillar-min-width, min-content), min-content)
-      )
-      repeat(calc(0 + var(--vvh-grid-panel-left, 0)), min-content)
-      1fr repeat(calc(0 + var(--vvh-grid-panel-right, 0)), min-content)
-      repeat(
-        calc(0 + var(--vvh-grid-pillar-right, 0)),
-        minmax(var(--vvh-pillar-min-width, min-content), min-content)
-      );
+    &.tabs-left {
+      &:has(#{variables.$select-panel}.left) {
+        grid-template-columns:
+          minmax(var(--vvh-pillar-min-width, min-content), min-content)
+          min-content 1fr;
+      }
+
+      &:has(#{variables.$select-panel}.right) {
+        grid-template-columns:
+          minmax(var(--vvh-pillar-min-width, min-content), min-content)
+          1fr min-content;
+      }
+    }
+
+    &.tabs-right {
+      &:has(#{variables.$select-panel}.left) {
+        grid-template-columns: min-content 1fr minmax(
+            var(--vvh-pillar-min-width, min-content),
+            min-content
+          );
+      }
+      &:has(#{variables.$select-panel}.right) {
+        grid-template-columns: 1fr min-content minmax(
+            var(--vvh-pillar-min-width, min-content),
+            min-content
+          );
+      }
+    }
+
+    &.tabs-off {
+      &:has(#{variables.$select-panel}.left) {
+        grid-template-columns:
+          minmax(var(--vvh-pillar-min-width, min-content), min-content)
+          1fr;
+      }
+      &:has(#{variables.$select-panel}.right) {
+        grid-template-columns: 1fr minmax(
+            var(--vvh-pillar-min-width, min-content),
+            min-content
+          );
+      }
+    }
 
     &.tabs-left {
       --vvh-grid-pillar-left: 1;
@@ -247,6 +265,10 @@
       #{variables.$select-tab-bar},
       #{variables.$select-footer-has-status-bar} {
         grid-column: 1 / 2;
+      }
+      
+      #{variables.$select-tab-bar} {
+        justify-self: start;
       }
     }
 
@@ -289,6 +311,10 @@
       #{variables.$select-footer-has-status-bar} {
         grid-column: -2 / -1;
       }
+
+      #{variables.$select-tab-bar} {
+        justify-self: end;
+      }
     }
 
     &.tabs-off {
@@ -305,6 +331,10 @@
         #{variables.$select-footer-has-status-bar} {
           grid-column: 1 / 2;
         }
+        
+        #{variables.$select-panel} {
+          justify-self: start;
+        }
       }
 
       &:has(#{variables.$select-panel}.right) {
@@ -319,6 +349,10 @@
         #{variables.$select-panel},
         #{variables.$select-footer-has-status-bar} {
           grid-column: -2 / -1;
+        }
+        
+        #{variables.$select-panel} {
+          justify-self: end;
         }
       }
 
