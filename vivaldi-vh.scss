@@ -91,4 +91,10 @@
   ) {
     @include grid-items.grid-layout-panel-in-pillar;
   }
+
+  @include variables.mixin-bind-command-chain-flag(
+    "titlebar-full-width"
+  ) {
+    @include grid-items.grid-layout-title-bar-full-width;
+  }
 }
