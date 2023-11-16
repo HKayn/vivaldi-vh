@@ -5,7 +5,9 @@
     align-items: center;
 
     > * {
-      margin: 0 !important; // override inline styling for proper centering along the flex axis
+      // override inline styling for proper centering along the flex axis
+      margin-top: 0 !important; 
+      margin-bottom: 0 !important; 
     }
 
     .horizontal-menu-pagetitle {
