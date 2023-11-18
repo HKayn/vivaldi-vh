@@ -79,7 +79,8 @@
       border: none;
     }
 
-    &.tabs-left {
+    &.tabs-left,
+    &.tabs-off:has(#{variables.$select-panel}.left) {
       #{variables.$select-title-bar},
       #{variables.$select-address-bar},
       #{variables.$select-bookmark-bar},
@@ -88,7 +89,8 @@
       }
     }
 
-    &.tabs-right {
+    &.tabs-right,
+    &.tabs-off:has(#{variables.$select-panel}.right) {
       #{variables.$select-title-bar},
       #{variables.$select-address-bar},
       #{variables.$select-bookmark-bar},
@@ -375,6 +377,10 @@
 
 @mixin panel-in-pillar {
   #browser {
+    #{variables.$select-panel} {
+      border-top: none !important; // overrides the border set in the title-bar-full-width mixin
+    }
+
     &.tabs-left:has(#{variables.$select-panel}.left) {
       // part of the backdrop-filter workaround above
       &::before {
@@ -526,6 +532,11 @@
     #{variables.$select-title-bar} {
       border-left: none;
       border-right: none;
+    }
+
+    &:is(.tabs-left, .tabs-right) #{variables.$select-panel},
+    #{variables.$select-webpage} {
+      border-top: 1px solid var(--colorBorder);
     }
 
     &:is(.tabs-left, .tabs-right) {
