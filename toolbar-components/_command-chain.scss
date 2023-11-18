@@ -59,5 +59,39 @@
     @include variables.mixin-highlight-toolbar-component-in-toolbar-editor(
       '#{variables.$select-command-chain-toolbar-component}:has(> button[title^="vvh-insert-linebreak"])'
     );
+
+    #{variables.$select-command-chain-toolbar-component} {
+      > button[title*="vvh-toggle-on"],
+      > button[title*="vvh-toggle-off"] {
+        > .button-icon {
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            inset: auto;
+            width: variables.$value-of-button-icon-size;
+            height: variables.$value-of-button-icon-size;
+            background-color: currentColor;
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' fill='none'%3E%3Cpath d='m7.25 9.5 2.25 9 2.25-9' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' /%3E%3Cpath d='M16.25 9.5V14h4.5V9.5m0 9V14h-4.5v4.5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' /%3E%3C/svg%3E");
+          }
+
+          > svg {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    #browser.dim-blurred.isblurred {
+      #{variables.$select-command-chain-toolbar-component} {
+        > button[title*="vvh-toggle-on"],
+        > button[title*="vvh-toggle-off"] {
+          > .button-icon::before {
+            opacity: variables.$value-of-dimmed-button-icon-opacity;
+          }
+        }
+      }
+    }
   }
 }

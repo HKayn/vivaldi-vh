@@ -16,6 +16,9 @@ $panel-toggle-width: 10px;
 $webview-container-has-mosaic-padding: 2px;
 $mosaic-tile-margin: 4px;
 
+$button-icon-size: 28px;
+$dimmed-button-icon-opacity: 0.65;
+
 // OS-specific values
 $win-address-bar-window-button-group-width: calc((46px * 3) / var(--uiZoomLevel));
 $win-address-bar-window-button-group-width-without-uizoomlevel: calc(46px * 3);
