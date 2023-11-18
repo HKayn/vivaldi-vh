@@ -213,46 +213,38 @@
       }
     }
 
+    #{variables.$select-title-bar},
+    #{variables.$select-address-bar},
+    #{variables.$select-bookmark-bar},
+    #{variables.$select-footer-has-status-bar} {
+      min-width: var(--vvh-pillar-min-width);
+    }
+
     &.tabs-left {
       &:has(#{variables.$select-panel}.left) {
-        grid-template-columns:
-          minmax(var(--vvh-pillar-min-width, min-content), min-content)
-          min-content 1fr;
+        grid-template-columns: min-content min-content 1fr;
       }
 
       &:has(#{variables.$select-panel}.right) {
-        grid-template-columns:
-          minmax(var(--vvh-pillar-min-width, min-content), min-content)
-          1fr min-content;
+        grid-template-columns: min-content 1fr min-content;
       }
     }
 
     &.tabs-right {
       &:has(#{variables.$select-panel}.left) {
-        grid-template-columns: min-content 1fr minmax(
-            var(--vvh-pillar-min-width, min-content),
-            min-content
-          );
+        grid-template-columns: min-content 1fr min-content;
       }
       &:has(#{variables.$select-panel}.right) {
-        grid-template-columns: 1fr min-content minmax(
-            var(--vvh-pillar-min-width, min-content),
-            min-content
-          );
+        grid-template-columns: 1fr min-content min-content;
       }
     }
 
     &.tabs-off {
       &:has(#{variables.$select-panel}.left) {
-        grid-template-columns:
-          minmax(var(--vvh-pillar-min-width, min-content), min-content)
-          1fr;
+        grid-template-columns: min-content 1fr;
       }
       &:has(#{variables.$select-panel}.right) {
-        grid-template-columns: 1fr minmax(
-            var(--vvh-pillar-min-width, min-content),
-            min-content
-          );
+        grid-template-columns: 1fr min-content;
       }
     }
 
@@ -377,8 +369,34 @@
 
 @mixin panel-in-pillar {
   #browser {
-    #{variables.$select-panel} {
+    &:is(.tabs-left, .tabs-right) #{variables.$select-panel} {
       border-top: none !important; // overrides the border set in the title-bar-full-width mixin
+    }
+
+    &.tabs-left:has(#{variables.$select-panel}.left),
+    &.tabs-right:has(#{variables.$select-panel}.right) {
+      // disable backdrop-filter on the panel as part of the backdrop-filter workaround above
+      #switch {
+        backdrop-filter: unset;
+      }
+    }
+
+    // Grid setup changes below
+
+    &.tabs-left:has(#{variables.$select-panel}.left),
+    &.tabs-right:has(#{variables.$select-panel}.right) {
+      #{variables.$select-panel} {
+        grid-row: calc(
+            1 + var(--vvh-grid-title-bar, 0) + var(--vvh-grid-address-bar-top, 0) +
+              var(--vvh-grid-bookmark-bar-top, 0)
+          ) /
+          calc(
+            -1 - var(--vvh-grid-bookmark-bar-bottom, 0) - var(
+                --vvh-grid-address-bar-bottom,
+                0
+              ) - var(--vvh-grid-status-bar, 0)
+          ) !important; // overrides grid-row-start set in title-bar-full-width mixin
+      }
     }
 
     &.tabs-left:has(#{variables.$select-panel}.left) {
@@ -417,111 +435,15 @@
       #{variables.$select-title-bar-menu-position-horizontal},
       #{variables.$select-bookmark-bar},
       #{variables.$select-footer-has-status-bar} {
-        grid-column: 2 / 4;
+        grid-column: -3 / -1;
       }
 
       #{variables.$select-panel} {
-        grid-column: 3 / 4;
+        grid-column: -2 / -1;
       }
 
       #{variables.$select-tab-bar} {
-        grid-column: 2 / 3;
-      }
-    }
-
-    &.tabs-left:has(#{variables.$select-panel}.left),
-    &.tabs-right:has(#{variables.$select-panel}.right) {
-      // disable backdrop-filter on the panel as part of the backdrop-filter workaround above
-      #switch {
-        backdrop-filter: unset;
-      }
-
-      &.disable-titlebar {
-        &.address-top {
-          &.bookmark-bar-top {
-            #{variables.$select-panel} {
-              grid-row: 3 / 4;
-            }
-          }
-
-          &.bookmark-bar-bottom {
-            #{variables.$select-panel} {
-              grid-row: 2 / 3;
-            }
-          }
-
-          &.bookmark-bar-top-off,
-          &.bookmark-bar-bottom-off {
-            #{variables.$select-panel} {
-              grid-row: 2 / 3;
-            }
-          }
-        }
-
-        &.address-bottom {
-          &.bookmark-bar-top {
-            #{variables.$select-panel} {
-              grid-row: 2 / 3;
-            }
-          }
-
-          &.bookmark-bar-bottom {
-            #{variables.$select-panel} {
-              grid-row: 1 / 2;
-            }
-          }
-
-          &.bookmark-bar-top-off,
-          &.bookmark-bar-bottom-off {
-            #{variables.$select-panel} {
-              grid-row: 1 / 2;
-            }
-          }
-        }
-      }
-
-      &:not(.disable-titlebar) {
-        &.address-top {
-          &.bookmark-bar-top {
-            #{variables.$select-panel} {
-              grid-row: 4 / 5;
-            }
-          }
-
-          &.bookmark-bar-bottom {
-            #{variables.$select-panel} {
-              grid-row: 3 / 4;
-            }
-          }
-
-          &.bookmark-bar-top-off,
-          &.bookmark-bar-bottom-off {
-            #{variables.$select-panel} {
-              grid-row: 3 / 4;
-            }
-          }
-        }
-
-        &.address-bottom {
-          &.bookmark-bar-top {
-            #{variables.$select-panel} {
-              grid-row: 3 / 4;
-            }
-          }
-
-          &.bookmark-bar-bottom {
-            #{variables.$select-panel} {
-              grid-row: 2 / 3;
-            }
-          }
-
-          &.bookmark-bar-top-off,
-          &.bookmark-bar-bottom-off {
-            #{variables.$select-panel} {
-              grid-row: 2 / 3;
-            }
-          }
-        }
+        grid-column: -3 / -2;
       }
     }
   }
@@ -551,7 +473,7 @@
 
     #{variables.$select-title-bar},
     #{variables.$select-title-bar-menu-position-horizontal} {
-      grid-column: 1 / -1;
+      grid-column: 1 / -1 !important; // overrides grid-column set in panel-in-pillar mixin
     }
 
     #{variables.$select-title-bar-menu-position-horizontal} {
