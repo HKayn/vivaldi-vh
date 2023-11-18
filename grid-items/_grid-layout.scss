@@ -144,7 +144,8 @@
       }
     }
 
-    &.address-top {
+    &.address-top,
+    &.address-top-off {
       --vvh-grid-address-bar-top: 1;
 
       #{variables.$select-address-bar},
@@ -195,7 +196,8 @@
       }
     }
 
-    &.address-bottom {
+    &.address-bottom,
+    &.address-bottom-off {
       --vvh-grid-address-bar-bottom: 1;
 
       #{variables.$select-address-bar},
