@@ -99,7 +99,7 @@
       }
     }
 
-    &.address-bottom.bookmark-bar-top #{variables.$select-title-bar},
+    &.bookmark-bar-top:not(.address-top) #{variables.$select-title-bar},
     &.address-top #{variables.$select-address-bar},
     &.bookmark-bar-top #{variables.$select-bookmark-bar} {
       border-bottom: 1px solid var(--colorBorder);
