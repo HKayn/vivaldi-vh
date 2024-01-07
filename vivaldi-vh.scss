@@ -24,6 +24,7 @@
 :root:has(#{variables.$select-browser-with-valid-settings}) {
   @include variables.custom-properties-declare;
 
+  @include base.border-styles;
   @include base.grid-layout-styles;
 
   @include grid-items.title-bar-styles;

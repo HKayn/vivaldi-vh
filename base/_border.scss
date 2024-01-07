@@ -1,0 +1,47 @@
+@use "../variables";
+
+@mixin styles {
+  #browser {
+    &.native {
+      border-top: 1px solid var(--colorBorder);
+    }
+
+    #{variables.$select-address-bar},
+    #{variables.$select-bookmark-bar},
+    #{variables.$select-footer-has-status-bar} {
+      border: none;
+    }
+
+    &.tabs-left,
+    &.tabs-off:has(#{variables.$select-panel}.left) {
+      #{variables.$select-title-bar},
+      #{variables.$select-address-bar},
+      #{variables.$select-bookmark-bar},
+      #{variables.$select-footer-has-status-bar} {
+        border-right: 1px solid var(--colorBorder);
+      }
+    }
+
+    &.tabs-right,
+    &.tabs-off:has(#{variables.$select-panel}.right) {
+      #{variables.$select-title-bar},
+      #{variables.$select-address-bar},
+      #{variables.$select-bookmark-bar},
+      #{variables.$select-footer-has-status-bar} {
+        border-left: 1px solid var(--colorBorder);
+      }
+    }
+
+    &.bookmark-bar-top:not(.address-top) #{variables.$select-title-bar},
+    &.address-top #{variables.$select-address-bar},
+    &.bookmark-bar-top #{variables.$select-bookmark-bar} {
+      border-bottom: 1px solid var(--colorBorder);
+    }
+
+    &.address-bottom #{variables.$select-address-bar},
+    &.bookmark-bar-bottom #{variables.$select-bookmark-bar},
+    #{variables.$select-footer-has-status-bar} {
+      border-top: 1px solid var(--colorBorder);
+    }
+  }
+}
