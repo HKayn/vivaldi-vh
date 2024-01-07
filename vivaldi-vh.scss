@@ -8,6 +8,7 @@
   Copyright (c) 2023 HKayn <https://hkayn.com>
 */
 
+@use "base";
 @use "variables";
 @use "grid-items";
 @use "toolbar-components";
@@ -23,7 +24,7 @@
 :root:has(#{variables.$select-browser-with-valid-settings}) {
   @include variables.custom-properties-declare;
 
-  @include grid-items.grid-layout-styles;
+  @include base.grid-layout-styles;
 
   @include grid-items.title-bar-styles;
   @include grid-items.address-bar-styles;
@@ -89,12 +90,12 @@
   @include variables.mixin-bind-command-chain-flag(
     "panel-in-pillar"
   ) {
-    @include grid-items.grid-layout-panel-in-pillar;
+    @include base.grid-layout-panel-in-pillar;
   }
 
   @include variables.mixin-bind-command-chain-flag(
     "titlebar-full-width"
   ) {
-    @include grid-items.grid-layout-title-bar-full-width;
+    @include base.grid-layout-title-bar-full-width;
   }
 }
