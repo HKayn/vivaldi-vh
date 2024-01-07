@@ -1,45 +1,52 @@
 @use "../variables";
 
 @mixin styles {
-  .UrlBar-AddressField {
-    z-index: 2;
-    // sets z-index 1 higher than badges of extensions toolbar component,
-    // so they don't show through the dropdown
+  #browser:is(.address-top, .address-bottom) #{variables.$select-address-bar},
+	#{variables.$select-status-bar} {
+		.UrlBar-AddressField {
+			z-index: 2;
+			// sets z-index 1 higher than badges of extensions toolbar component,
+			// so they don't show through the dropdown
+	
+			margin: calc(
+					calc(
+							variables.$value-of-address-bar-height -
+								variables.$value-of-address-field-height
+						) / 2
+				)
+				variables.$value-of-window-edge-distance;
+			flex: 1 1 100%;
+	
+			&:has(.OmniDropdown) {
+				z-index: 3;
+				// sets z-index 1 higher than previously set when the dropdown is visible,
+				// so the dropdown of this address field doesn't get covered by other address or search fields when focused
+			}
+	
+			.UrlBar-UrlFieldWrapper {
+				min-width: unset;
+			}
+	
+			> .toolbar {
+				padding-left: 0 !important; // overrides padding added by the browser on native windows, which appears to be by mistake
+	
+				> .UrlBar-UrlObfuscationWarning {
+					height: 22px;
+					width: 22px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			}
+		}
+	}
 
-    margin: calc(
-        calc(
-            variables.$value-of-address-bar-height -
-              variables.$value-of-address-field-height
-          ) / 2
-      )
-      variables.$value-of-window-edge-distance;
-    flex: 1 1 100%;
-
-    &:has(.OmniDropdown) {
-      z-index: 3;
-      // sets z-index 1 higher than previously set when the dropdown is visible,
-      // so the dropdown of this address field doesn't get covered by other address or search fields when focused
-    }
-
-    .UrlBar-UrlFieldWrapper {
-      min-width: unset;
-    }
-
-    > .toolbar {
-      padding-left: 0 !important; // overrides padding added by the browser on native windows, which appears to be by mistake
-
-      > .UrlBar-UrlObfuscationWarning {
-        height: 22px;
-        width: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  }
-
-  #browser:is(.address-top-off, .address-bottom-off) .UrlBar-AddressField {
-    width: calc(100% - (2 * variables.$value-of-window-edge-distance));
+	#browser:is(.address-top-off, .address-bottom-off) #{variables.$select-address-bar} .UrlBar-AddressField:has(#urlFieldInput:focus) {
+    position: fixed;
+		inset: unset;
+    left: 20vw;
+    right: 20vw;
+		margin: 0;
   }
 }
 
@@ -48,19 +55,4 @@
     ".UrlBar-AddressField",
     "#urlFieldInput"
   );
-
-  #browser:is(.address-top-off, .address-bottom-off) {
-    &.tabs-left:has(#{variables.$select-panel}.right),
-    &.tabs-right:has(#{variables.$select-panel}.left) {
-      .UrlBar-AddressField {
-        width: calc(var(--vvh-extend-on-focus-width, 1200px) - ((2 * variables.$value-of-window-edge-distance) + var(--vvh-input-field-extend-on-focus-margin-offset)));
-        max-width: calc(100vw - ((2 * variables.$value-of-window-edge-distance) + var(--vvh-input-field-extend-on-focus-margin-offset)));
-      }
-    }
-
-    .UrlBar-AddressField {
-      width: calc(var(--vvh-extend-on-focus-width, 1200px) - (2 * variables.$value-of-window-edge-distance));
-      max-width: calc(100vw - (2 * variables.$value-of-window-edge-distance));
-    }
-  } 
 }

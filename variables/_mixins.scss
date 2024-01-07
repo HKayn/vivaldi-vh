@@ -6,7 +6,7 @@
   #browser {
     &.tabs-left,
     &.tabs-off:has(#{selectors.$panel}.left) {
-      #{selectors.$address-bar},
+      &:not(.address-top-off, .address-bottom-off) #{selectors.$address-bar},
       #{selectors.$footer-has-status-bar} {
         #{$element}:has(#{$text-input}:focus) {
           margin-right: var(
@@ -18,7 +18,7 @@
 
     &.tabs-right,
     &.tabs-off:has(#{selectors.$panel}.right) {
-      #{selectors.$address-bar},
+      &:not(.address-top-off, .address-bottom-off) #{selectors.$address-bar},
       #{selectors.$footer-has-status-bar} {
         #{$element}:has(#{$text-input}:focus) {
           margin-left: var(
