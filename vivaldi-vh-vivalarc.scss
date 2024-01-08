@@ -1,9 +1,11 @@
 /*
-  Vivaldi VH
+  Vivaldi VH VivalArc Edition
   Version: 1.3.1
   Target Vivaldi Browser versions: 6.2
 
   Vivaldi VH is a CSS modification for Vivaldi Browser that grants your webpages the entire vertical space of the browser window by moving the rest of the UI into a separate column.
+
+  This edition of Vivaldi VH is designed to be used in combination with the VivalArc CSS modification: https://arc.tovi.fun
 
   Copyright (c) 2023 HKayn <https://hkayn.com>
 */
@@ -24,7 +26,7 @@
 :root:has(#{variables.$select-browser-with-valid-settings}) {
   @include variables.custom-properties-declare;
 
-  @include base.border-styles;
+  // border-styles are excluded
   @include base.grid-layout-styles;
 
   @include grid-items.title-bar-styles;
@@ -47,7 +49,7 @@
 
   @include ui-elements.default-browser-notification-styles;
 
-  // # Command Chain Flag bindings
+  // # Command Chain Flag bindings with edition-specific changes
 
   @include variables.mixin-bind-command-chain-flag(
     "addressbar-universal-flex-grow",
@@ -63,24 +65,37 @@
     @include grid-items.status-bar-universal-flex-grow;
   }
 
-  @include variables.mixin-bind-command-chain-flag(
-    "webpage-permanent-padding",
-    true
-  ) {
-    @include grid-items.webpage-permanent-padding;
-  }
+  // webpage-permanent-padding is not included because it is redundant
 
   @include variables.mixin-bind-command-chain-flag(
     "addressfield-extend-on-focus",
     true
   ) {
     @include toolbar-components.address-field-extend-on-focus;
+
+    #browser {
+      &:not(.address-top-off, .address-bottom-off) #{variables.$select-address-bar},
+      #{variables.$select-footer-has-status-bar} {
+        .UrlBar-AddressField:has(#urlFieldInput:focus) {
+          background-color: var(--colorBgIntense); // restores background color set by browser
+        }
+      }
+    }
   }
 
   @include variables.mixin-bind-command-chain-flag(
     "searchfield-extend-on-focus"
   ) {
     @include toolbar-components.search-field-extend-on-focus;
+
+    #browser {
+      &:not(.address-top-off, .address-bottom-off) #{variables.$select-address-bar},
+      #{variables.$select-footer-has-status-bar} {
+        .UrlBar-SearchField:has(.searchfield-input:focus) {
+          background-color: var(--colorBgIntense); // restores background color set by browser
+        }
+      }
+    }
   }
 
   @include variables.mixin-bind-command-chain-flag(
@@ -95,9 +110,34 @@
     @include base.grid-layout-panel-in-pillar;
   }
 
-  @include variables.mixin-bind-command-chain-flag(
-    "titlebar-full-width"
-  ) {
-    @include base.grid-layout-title-bar-full-width;
+  @include base.grid-layout-title-bar-full-width; // always enabled because VivalArc expects a full width title bar
+
+  // # Edition-specific compatibility fixes
+
+  #{variables.$select-title-bar},
+  #{variables.$select-address-bar} {
+    background: var(--colorTabBar) !important; // value taken from VivalArc
+  }
+
+  #{variables.$select-panel},
+  #{variables.$select-webpage} {
+    border-top: unset !important; // reverts borders of titlebar-full-width
+  }
+
+  #{variables.$select-title-bar} {
+    min-height: var(--window-header) !important; // value taken from VivalArc
+  }
+
+  #{variables.$select-address-bar}::after {
+    display: none;
+  }
+
+  #browser.disable-titlebar {
+    #{variables.$select-panel},
+    #{variables.$select-webpage} {
+      margin-top: var(
+        --window-header
+      ) !important; // custom property taken from VivalArc
+    }
   }
 }
