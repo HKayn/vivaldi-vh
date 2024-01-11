@@ -6,9 +6,6 @@ This document contains all information regarding future changes and known issues
 
 The following will be added to Vivaldi VH in the future, in no particular order:
 
-- Allow activation of Vivaldi VH when "Show Tab Bar" is unchecked. The panel will then need to be enabled, as it takes its place.
-- Allow activation of Vivaldi VH when "Show Address Bar" is unchecked.
-- A Command Chain Flag to let the title bar span the entire window width.
 - A "Zen Mode" where the webpage takes up the entire browser window, with the Pillar and panel floating in from the sides on demand.
 - One-time-use JS modification that adds all available Command Chain Flags as Command Chains.
 - Ongoing updates to maintain compatibility with the latest stable version of Vivaldi Browser.
@@ -36,3 +33,4 @@ When developing Vivaldi VH, I try to hold myself to these values, listed in orde
 - Toolbar component styling is partly applied to demo toolbars inside the toolbar editor window.
 - When the panel does not touch the left or right window edge, panel resizing will behave in unexpected ways, but still be fully functional.
 - When the panel does not touch the left or right window edge, the "Add Web Panel" popup will be slightly misplaced, but still fully functional.
+- Vivaldi VH activation toggles do not fully replace the original command chain icon inside the toolbar editor window. This does not occur once the toggle is placed inside a toolbar.
