@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.4.0 (2024-01-11)
+
+### Changes
+
+- The presence of the tab bar is no longer mandatory to activate Vivaldi VH if the panel is present. When the tab bar is missing, the panel will take its place inside the Pillar.
+- The presence of the address bar is no longer mandatory to activate Vivaldi VH.
+- The Command Chain Flag `vvh-enable-titlebar-full-width` is now available, which grows the title bar to take up the entire width of the browser window.
+  - *When Vivaldi VH is active, your window buttons might no longer be where you expect to find them, e.g. in the top right corner of the window on Windows, or the top left corner on MacOS if your Pillar is on the right side. This feature is now available as a Command Chain Flag for anyone who wishes to preserve any associated muscle memory.*
+- The Command Chain Utilities `vvh-toggle-on` and `vvh-toggle-off` are now available, which receive a special icon and hide themselves depending on the current activation state of Vivaldi VH.
+- At the top of the `vivaldi-vh.css` file, custom CSS properties are now exposed for the following settings:
+  - minimum width of the Pillar
+  - width of toolbar components that extend on focus (e.g. the address field)
+- The VivalArc Edition of Vivaldi VH is now available. This is an alternative distribution of Vivaldi VH designed to be compatible with the VivalArc CSS modification.
+- Documentation has been updated.
+
+### Fixes
+
+- When page tiling is enabled, webpages will no longer have excessive padding.
+- Fixed the layout of the extensions toolbar component inside the panel.
+
 ## v1.3.1 (2023-10-18)
 
 ### Changes
