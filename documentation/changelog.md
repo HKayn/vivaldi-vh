@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.4.1 (2024-01-16)
+
+### Fixes
+
+- Vivaldi VH now properly checks whether the panel is enabled.
+  - *As a reminder: When the tab bar and the panel are both hidden, Vivaldi VH will disable itself. Otherwise, the majority of the Pillar would simply be empty.*
+- Search bar styles now only apply to search bars in the address bar and the status bar.
+  - *This fixes cases of wrongly styled search bars in the panel and on the new tab page.*
+
 ## v1.4.0 (2024-01-11)
 
 ### Changes
