@@ -40,7 +40,8 @@ To disable: `vvh-disable-webpage-permanent-padding`
 
 The padding around webpages that normally only appears when tab tiling is active is permanently visible.
 
-**Note:** This feature is not available on Vivaldi VH VivalArc Edition.
+> **Note:** \
+> This feature is not available on Vivaldi VH VivalArc Edition.
 
 ### Extend address field width when editing input
 
@@ -82,7 +83,8 @@ To enable: `vvh-enable-titlebar-full-width`
 
 When the title bar is enabled, it takes up the entire width of the browser window.
 
-**Note:** On Vivaldi VH VivalArc Edition, this feature is permanently enabled and cannot be disabled.
+> **Note:** \
+> On Vivaldi VH VivalArc Edition, this feature is permanently enabled and cannot be disabled.
 
 ## Precedence Rules
 

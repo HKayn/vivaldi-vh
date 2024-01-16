@@ -36,4 +36,5 @@ When placed inside a toolbar, these will receive a special icon and be shown dep
 
 The name can have any prefix and/or suffix; names such as `vvh-toggle-on-1` or `Turn Vivaldi VH off (vvh-toggle-off)` will be recognized as Vivaldi VH activation toggles.
 
-**Note:** Command Chains with these names will **not** change the activation state of Vivaldi VH by themselves! Vivaldi VH enables itself depending on specific browser settings such as the tab bar position. Command Chains with these names should execute commands that change the relevant browser settings, e.g. "Tabs on Top" or "Tabs on Left".
+> **Note:** \
+> Command Chains with these names will **not** change the activation state of Vivaldi VH by themselves! Vivaldi VH enables itself depending on specific browser settings such as the tab bar position. Command Chains with these names should execute commands that change the relevant browser settings, e.g. "Tabs on Top" or "Tabs on Left".
