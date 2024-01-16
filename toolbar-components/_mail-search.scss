@@ -1,23 +1,26 @@
 @use "../variables";
 
 @mixin styles {
-  #{variables.$select-mail-search} {
-    margin: calc(
-        calc(
-            variables.$value-of-address-bar-height -
-              variables.$value-of-address-field-height
-          ) / 2
-      )
-      variables.$value-of-window-edge-distance;
-    margin-right: variables.$value-of-window-edge-distance !important; // override inline margin-right: 6px
-
-    .UrlBar-UrlFieldWrapper {
-      min-width: unset;
+  #browser:is(.address-top, .address-bottom) #{variables.$select-address-bar},
+	#{variables.$select-status-bar} {
+    #{variables.$select-mail-search} {
+      margin: calc(
+          calc(
+              variables.$value-of-address-bar-height -
+                variables.$value-of-address-field-height
+            ) / 2
+        )
+        variables.$value-of-window-edge-distance;
+      margin-right: variables.$value-of-window-edge-distance !important; // override inline margin-right: 6px
+  
+      .UrlBar-UrlFieldWrapper {
+        min-width: unset;
+      }
     }
-  }
-
-  #{variables.$select-toolbar-linebreak} + #{variables.$select-mail-search}:has(+ #{variables.$select-command-chain-toolbar-component} > button[title^=vvh-insert-linebreak]
-    ) {
-    flex: 1 1 100%;
+  
+    #{variables.$select-toolbar-linebreak} + #{variables.$select-mail-search}:has(+ #{variables.$select-command-chain-toolbar-component} > button[title^=vvh-insert-linebreak]
+      ) {
+      flex: 1 1 100%;
+    }
   }
 }
