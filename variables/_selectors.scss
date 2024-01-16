@@ -1,7 +1,7 @@
 // This file contains selectors that can be reused and/or are in need of semantic meaning.
 
 // Settings check intended to act as a failsafe (expected to be used with :has())
-$browser-with-valid-settings: "#browser:is(.tabs-left, .tabs-right):not(.fullscreen, .minimal-ui), #browser.tabs-off:not(.fullscreen, .minimal-ui) #panels-container";
+$browser-with-valid-settings: "#browser:is(.tabs-left, .tabs-right):not(.fullscreen, .minimal-ui), #browser.tabs-off:not(.fullscreen, .minimal-ui) #panels-container:not(.switcher)";
 
 // Grid items
 $title-bar: "#titlebar";
