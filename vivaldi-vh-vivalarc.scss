@@ -125,7 +125,7 @@
   }
 
   #{variables.$select-title-bar} {
-    min-height: var(--window-header) !important; // value taken from VivalArc
+    min-height: var(--win-header) !important; // value taken from VivalArc
   }
 
   #{variables.$select-address-bar}::after {
@@ -136,7 +136,7 @@
     #{variables.$select-panel},
     #{variables.$select-webpage} {
       margin-top: var(
-        --window-header
+        --win-header
       ) !important; // custom property taken from VivalArc
     }
   }
