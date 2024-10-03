@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.4.2 (2024-10-03)
+
+### Changes
+
+- A separate addon "Zen Mode" is now available, which adds the Command Chain Flag `vvh-enable-zen-mode` to show the Pillar and panel only on hover.
+  - *Since this functionality currently has several known issues, it was not made part of Vivaldi VH, but is instead distributed separately for anyone who wishes to use it regardless.*
+
+### Fixes
+
+- Fixed a case where the status bar would break the Pillar layout.
+- Fixed a misplacement of the address bar inside the Pillar.
+- The regular (non-Mail) address bar will no longer appear with a delay when switching tabs or navigating away from the Mail page.
+- Fixed cases of button popups (e.g. profile selection, workspace selection) being covered by other UI elements.
+- VivalArc Edition: Fixed the height of the window header. Thanks [dijidiji](https://github.com/dijidiji) for reporting this!
+- VivalArc Edition: Fixed cases where the panel erroneously gained an upper margin.
+
 ## v1.4.1 (2024-01-16)
 
 ### Fixes
