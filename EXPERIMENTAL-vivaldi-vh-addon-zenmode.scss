@@ -1,0 +1,409 @@
+/*
+  EXPERIMENTAL Vivaldi VH Addon - Zen Mode
+  Target Vivaldi VH version: 1.4.2
+  Target Vivaldi Browser versions: 6.5
+
+  This addon for Vivaldi VH adds a Command Chain Flag "vvh-enable-zen-mode", which hides the Pillar and panel until the sides of the browser window are hovered.
+
+  For instructions on how to enable this Command Chain Flag, refer to the documentation for Vivaldi VH.
+
+  Copyright (c) 2024 HKayn <https://hkayn.com>
+*/
+
+/*
+  For ideal conditions, make the following adjustments to your browser theme:
+  - Set panel transparency to 0%.
+  - Disable "Transparent Tab Bar".
+*/
+
+/*
+  Known issues with this addon:
+  - On the VivalArc edition, parts of the Pillar may lack a background.
+  - On the VivalArc edition, the webpage is not padded correctly.
+  - The title bar cannot be used to drag the window unless title-bar-full-width is enabled.
+  - During the fade-out delay, the panel and tab bar background will lose their blur effects if set.
+  - During the fade-out delay, a transparent tab bar may change its background color.
+  - When the mouse exits the browser window while crossing the zen mode hover area, elements within the toolbars may wrongfully think they're still being hovered.
+*/
+
+@use "variables";
+
+:root {
+  /* Set custom parameters for the zen mode fade animation. Proceed with caution: */
+  --vvh-zen-mode-animation-duration: 0.1s;
+  --vvh-zen-mode-animation-timing-function: ease-out;
+  --vvh-zen-mode-fade-in-animation-delay: 0s;
+  --vvh-zen-mode-fade-out-animation-delay: 0.5s;
+  --vvh-zen-mode-animation-translate-length: 10px;
+  --vvh-zen-mode-hover-left-width: 25px;
+  --vvh-zen-mode-hover-right-width: 25px;
+}
+
+@function has-flag-enabled($flag) {
+  @return ':has(:is(#{variables.$select-editable-toolbars}) button[title="vvh-enable-#{$flag}"]):not(:has(:is(#{variables.$select-editable-toolbars}) button[title="vvh-disable-#{$flag}"]))';
+}
+@function has-flag-not-disabled($flag) {
+  @return ':not(:has(:is(#{variables.$select-editable-toolbars}) button[title="vvh-disable-#{$flag}"]))';
+}
+@function zen-mode-interacting-with($selector) {
+  @return '#{$selector} > :hover, #{$selector}:focus-within';
+}
+
+
+
+// # @mixin panel-in-pillar
+
+:root:has(#{variables.$select-browser-with-valid-settings}) #{has-flag-enabled(panel-in-pillar)} {
+  #browser {
+    &.tabs-left:has(#{variables.$select-panel}.left),
+    &.tabs-right:has(#{variables.$select-panel}.right) {
+      // overrides styles from zen-mode mixin
+      #{variables.$select-tab-bar}::after {
+        content: unset !important;
+      }
+  
+      #{variables.$select-panel}::after {
+        content: "bla" !important;
+      }
+    }
+  }
+}
+
+
+
+// # @mixin title-bar-full-width
+
+:root:has(#{variables.$select-browser-with-valid-settings}) #{has-flag-enabled(titlebar-full-width)} {
+  #browser:not(.disable-titlebar) {
+    #{variables.$select-title-bar},
+    #{variables.$select-title-bar-menu-position-horizontal} {
+      z-index: 9999 !important; // prevents pseudo-elements from the zen-mode mixin from blocking this
+
+      /*
+      // override properties set in zen-mode mixin
+      translate: 0 !important;
+      opacity: 1 !important;
+      animation: none !important;
+      transition: none !important;
+      visibility: visible !important;
+      z-index: 9999 !important; // prevents pseudo-elements from the zen-mode mixin from blocking this
+      */
+    }
+  }
+}
+
+
+
+// # @mixin zen-mode
+
+:root:has(#{variables.$select-browser-with-valid-settings}) #{has-flag-enabled(zen-mode)} {
+  // Conditions which can cause specific parts of the UI to reappear:
+  // * A Pillar item is hovered or contains focus
+  // * The panel is hovered or contains focus
+  // * The panel is open
+  //
+  // Other conditions whose origin in the UI cannot be feasibly determined:
+  // * A .button-popup exists
+  // * #vivaldi-tooltip has any items
+  //
+  // With this knowledge, it's for the best for now
+  // to make all parts of the UI reappear whenever any condition is fulfilled.
+  // Otherwise there might be behaviour that is not intuitive to the end user, e.g.:
+  // Hovering over the Pillar would make only the Pillar appear,
+  // but once a button popup inside the Pillar opens, 
+  // the panel on the opposite side would suddely show up too.
+
+  #browser {
+    #titlebar,
+    #titlebar #pagetitle {
+      pointer-events: all; // the browser sets this to "none" for some reason?
+    }
+
+    #{variables.$select-webpage} {
+      grid-column: 1 / 9999;
+    }
+
+    #{variables.$select-tab-bar},
+    #{variables.$select-panel} {
+      position: relative;
+
+      &::after { // #tabbar-wrapper:before is already in use by the browser
+        position: absolute;
+        top: -100vh;
+        height: 200vh;
+        pointer-events: auto;
+        z-index: 0;
+      }
+    }
+
+    #{variables.$select-tab-bar} > *,
+    #{variables.$select-panel} > * {
+      z-index: 1;
+    }
+
+    &.tabs-left #{variables.$select-tab-bar}::after,
+    #{variables.$select-panel}.left::after {
+      left: 0;
+      width: var(--vvh-zen-mode-hover-left-width);
+      translate: var(--vvh-zen-mode-animation-translate-length); // counteracts translation of whatever this is in
+      content: "";
+    }
+
+    &.tabs-right #{variables.$select-tab-bar}::after,
+    #{variables.$select-panel}.right::after {
+      right: 0;
+      width: var(--vvh-zen-mode-hover-right-width);
+      translate: calc(-1 * var(--vvh-zen-mode-animation-translate-length)); // counteracts translation of whatever this is in
+      content: "";
+    }
+
+    &.tabs-left #{variables.$select-panel}.left::after,
+    &.tabs-right #{variables.$select-panel}.right::after {
+      content: unset;
+    }
+
+    #tabs-container .resize .tab-strip,
+    #tabs-container .resize .tab-position,
+    #tabs-container .resize .toolbar-tabbar {
+      pointer-events: none; // Overrides value auto set by browser on these selectors
+    }
+
+    // Selecting all Pillar items
+    #{variables.$select-address-bar},
+    #main .mainbar::before,
+    #{variables.$select-bookmark-bar},
+    #{variables.$select-tab-bar},
+    #{variables.$select-footer-has-status-bar},
+    &.tabs-off #{variables.$select-panel},
+    &:not(#{has-flag-enabled(titlebar-full-width)}) #{variables.$select-title-bar},
+    &:not(#{has-flag-enabled(titlebar-full-width)}) #{variables.$select-title-bar-menu-position-horizontal} {
+      translate: calc(
+          (var(--vvh-grid-pillar-left, 0) * (-1 * var(--vvh-zen-mode-animation-translate-length)))
+          + (var(--vvh-grid-pillar-right, 0) * var(--vvh-zen-mode-animation-translate-length))
+        );
+      opacity: 0;
+      z-index: 1;
+      transition:
+        translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+        opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay);
+      animation: 0s var(--vvh-zen-mode-animation-timing-function) calc(var(--vvh-zen-mode-animation-duration) + var(--vvh-zen-mode-fade-out-animation-delay)) disable-pointer-events;
+      animation-fill-mode: forwards;
+    }
+
+    // extend transition values that may already be present
+    &#{has-flag-not-disabled(addressfield-extend-on-focus)} {
+      #{variables.$select-address-bar},
+      #{variables.$select-footer-has-status-bar} {
+        &:has(.UrlBar-AddressField #urlFieldInput) {
+          transition: 
+            translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            z-index 0s 0.2s; // delays z-index change in _grid-layout.scss by the transition duration
+        }
+
+        &:has(.UrlBar-AddressField #urlFieldInput:focus) {
+          transition: 
+            translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            z-index 0s 0s;
+        }
+      }
+    }
+    &#{has-flag-enabled(searchfield-extend-on-focus)} {
+      #{variables.$select-address-bar},
+      #{variables.$select-footer-has-status-bar} {
+        &:has(.UrlBar-SearchField .searchfield-input) {
+          transition: 
+            translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            z-index 0s 0.2s; // delays z-index change in _grid-layout.scss by the transition duration
+        }
+
+        &:has(.UrlBar-SearchField .searchfield-input:focus) {
+          transition: 
+            translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            z-index 0s 0s;
+        }
+      }
+    }
+    #{variables.$select-panel} {
+      // extend & override inline transition property
+      transition:
+        width var(--duration) ease-out,
+        translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+        opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay) !important;
+    }
+
+    &:not(#{has-flag-enabled(titlebar-full-width)}) #{variables.$select-title-bar},
+    &:not(#{has-flag-enabled(titlebar-full-width)}) #{variables.$select-title-bar-menu-position-horizontal} {
+      z-index: 2; // prevents any ::after elements in this mixin from covering this
+    }
+
+    #{variables.$select-panel} {
+      z-index: 2 !important; // prevents the tab bar from covering the panel
+    }
+
+    #{variables.$select-address-bar},
+    #{variables.$select-footer-has-status-bar} {
+      z-index: 3 !important; // prevents tab bar from covering these
+    }
+
+    &.tabs-left:has(#{variables.$select-panel}.right),
+    &.tabs-right:has(#{variables.$select-panel}.left) {
+      #{variables.$select-panel} {
+        z-index: 4 !important; // prevents other grid items from covering the panel
+      }
+    }
+
+    &:not(.tabs-off) #{variables.$select-panel} {
+      translate: calc(
+          (var(--vvh-grid-panel-left, 0) * (-1 * var(--vvh-zen-mode-animation-translate-length)))
+          + (var(--vvh-grid-panel-right, 0) * var(--vvh-zen-mode-animation-translate-length))
+        );
+      opacity: 0;
+      z-index: 1;
+      transition:
+        translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+        opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay);
+      animation: 0s var(--vvh-zen-mode-animation-timing-function) calc(var(--vvh-zen-mode-animation-duration) + var(--vvh-zen-mode-fade-out-animation-delay)) disable-pointer-events;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes disable-pointer-events {
+      0%, 99% {
+        pointer-events: auto;
+      }
+      100% {
+        pointer-events: none;
+      }
+    }
+
+    @keyframes enable-pointer-events {
+      0%, 99% {
+        pointer-events: none;
+      }
+      100% {
+        pointer-events: auto;
+      }
+    }
+  }
+
+  #browser.toolbar-edit-mode,
+  #browser:has(
+    #{variables.$select-tab-bar}:hover,
+    #{variables.$select-panel}:hover,
+    > .button-popup,
+    > #vivaldi-tooltip:not(:empty),
+    #{zen-mode-interacting-with(#{variables.$select-address-bar})},
+    #{zen-mode-interacting-with(#{variables.$select-bookmark-bar})},
+    #{zen-mode-interacting-with(#{variables.$select-tab-bar})},
+    footer:hover .toolbar-statusbar, footer:focus-within .toolbar-statusbar,
+    #{zen-mode-interacting-with(#{variables.$select-panel})},
+    #{variables.$select-panel}:not(.icons, .switcher)
+  ),
+  #browser:not(#{has-flag-enabled(titlebar-full-width)}):has(
+    #{zen-mode-interacting-with(#{variables.$select-title-bar})},
+    #{zen-mode-interacting-with(#{variables.$select-title-bar-menu-position-horizontal})}
+  ) {
+    #{variables.$select-tab-bar}::after,
+    #{variables.$select-panel}::after {
+      content: unset;
+    }
+
+    #tabs-container .resize .tab-strip,
+    #tabs-container .resize .tab-position,
+    #tabs-container .resize .toolbar-tabbar {
+      animation: 0s linear var(--vvh-zen-mode-fade-in-animation-delay) enable-pointer-events;
+      animation-fill-mode: forwards;
+    }
+
+    // Selecting all Pillar items
+    &:not(#{has-flag-enabled(titlebar-full-width)}) #{variables.$select-title-bar}, // including the has-flag-enabled function again to match specifity with that of the selector that hides these
+    &:not(#{has-flag-enabled(titlebar-full-width)}) #{variables.$select-title-bar-menu-position-horizontal},
+    #{variables.$select-address-bar},
+    #main .mainbar::before,
+    #{variables.$select-bookmark-bar},
+    #{variables.$select-tab-bar},
+    #{variables.$select-footer-has-status-bar},
+    &.tabs-off #{variables.$select-panel} {
+      translate: 0;
+      opacity: 1;
+      transition:
+        translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay),
+        opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay);
+      animation: 0s linear var(--vvh-zen-mode-fade-in-animation-delay) enable-pointer-events;
+      animation-fill-mode: forwards;
+    }
+
+    // extend transition values that may already be present
+    &#{has-flag-not-disabled(addressfield-extend-on-focus)} {
+      #{variables.$select-address-bar},
+      #{variables.$select-footer-has-status-bar} {
+        &:has(.UrlBar-AddressField #urlFieldInput) {
+          transition: 
+          translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay),
+          opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay),
+            z-index 0s 0.2s; // delays z-index change in _grid-layout.scss by the transition duration
+        }
+
+        &:has(.UrlBar-AddressField #urlFieldInput:focus) {
+          transition: 
+          translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay),
+          opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay),
+            z-index 0s 0s;
+        }
+      }
+    }
+    &#{has-flag-enabled(searchfield-extend-on-focus)} {
+      #{variables.$select-address-bar},
+      #{variables.$select-footer-has-status-bar} {
+        &:has(.UrlBar-SearchField .searchfield-input) {
+          transition: 
+            translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            z-index 0s 0.2s; // delays z-index change in _grid-layout.scss by the transition duration
+        }
+
+        &:has(.UrlBar-SearchField .searchfield-input:focus) {
+          transition: 
+            translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-out-animation-delay),
+            z-index 0s 0s;
+        }
+      }
+    }
+    #{variables.$select-panel} {
+      // extend & override inline transition property
+      transition:
+        width var(--duration) ease-out,
+        translate var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay),
+        opacity var(--vvh-zen-mode-animation-duration) var(--vvh-zen-mode-animation-timing-function) var(--vvh-zen-mode-fade-in-animation-delay) !important;
+    }
+
+    &:not(.tabs-off) #{variables.$select-panel} {
+      translate: 0;
+      opacity: 1;
+      animation: 0s linear var(--vvh-zen-mode-fade-in-animation-delay) enable-pointer-events;
+      animation-fill-mode: forwards;
+    }
+
+    &.tabs-left:has(#{variables.$select-panel}.right),
+    &.tabs-right:has(#{variables.$select-panel}.left) {
+      #{variables.$select-panel} {
+        translate: 0;
+      }
+    }
+    
+    // TODO: Fix the following bug:
+    // When the mouse exits the browser window at certain speeds while crossing the zen mode hover area,
+    // elements within the toolbars may wrongfully think they're still being hovered.
+  }
+}
+
+// do the usual things to the command chain flag button (e.g. distinguish it in the toolbar editor, hide it in the toolbar)
+:root:has(#{variables.$select-browser-with-valid-settings}) {
+  @include variables.mixin-bind-command-chain-flag(
+    "zen-mode"
+  ) {}
+}
