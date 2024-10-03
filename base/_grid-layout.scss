@@ -74,6 +74,12 @@
       // when switching/navigating away from vivaldi://mail.
     }
 
+    .button-popup {
+      z-index: 9999;
+      // The button popup (e.g. profile selection, workspace selection) is a sibling of the grid items.
+      // This sets the z-index higher than any sibling could ever be.
+    }
+
     // Grid setup below
 
     display: grid;
