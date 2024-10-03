@@ -114,6 +114,16 @@
 
   // # Edition-specific compatibility fixes
 
+  #browser.linux {
+    --vvh-vivalarc-os-specific-header: var(--linux-header); // custom property taken from VivalArc
+  }
+  #browser.mac {
+    --vvh-vivalarc-os-specific-header: var(--mac-header); // custom property taken from VivalArc
+  }
+  #browser.win {
+    --vvh-vivalarc-os-specific-header: var(--win-header); // custom property taken from VivalArc
+  }
+
   #{variables.$select-title-bar},
   #{variables.$select-address-bar} {
     background: var(--colorTabBar) !important; // value taken from VivalArc
@@ -125,7 +135,7 @@
   }
 
   #{variables.$select-title-bar} {
-    min-height: var(--window-header) !important; // value taken from VivalArc
+    min-height: var(--vvh-vivalarc-os-specific-header) !important; // value taken from VivalArc
   }
 
   #{variables.$select-address-bar}::after {
@@ -135,9 +145,7 @@
   #browser.disable-titlebar {
     #{variables.$select-panel},
     #{variables.$select-webpage} {
-      margin-top: var(
-        --window-header
-      ) !important; // custom property taken from VivalArc
+      margin-top: var(--vvh-vivalarc-os-specific-header) !important;
     }
   }
 }
