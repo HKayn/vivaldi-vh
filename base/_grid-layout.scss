@@ -67,6 +67,13 @@
       // * "Accent on Window is enabled"
     }
 
+    #main .mainbar .toolbar-hidden {
+      z-index: 4; // Overrides the value -1 that the browser sets for hidden toolbars
+      
+      // Value -1 would cause address bar to appear with delay
+      // when switching/navigating away from vivaldi://mail.
+    }
+
     // Grid setup below
 
     display: grid;
