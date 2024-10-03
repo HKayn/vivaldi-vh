@@ -24,6 +24,7 @@
   - During the fade-out delay, the panel and tab bar background will lose their blur effects if set.
   - During the fade-out delay, a transparent tab bar may change its background color.
   - When the mouse exits the browser window while crossing the zen mode hover area, elements within the toolbars may wrongfully think they're still being hovered.
+  - When the tab bar is not present, the Pillar does not disappear while the panel is open. (It should)
 */
 
 @use "variables";
@@ -63,7 +64,7 @@
       }
   
       #{variables.$select-panel}::after {
-        content: "bla" !important;
+        content: "" !important;
       }
     }
   }
