@@ -108,6 +108,15 @@
     "panel-in-pillar"
   ) {
     @include base.grid-layout-panel-in-pillar;
+
+    // undo margin-top set in edition-specific fixes
+    #browser.disable-titlebar #{variables.$select-panel} {
+      margin-top: calc(var(--vvh-vivalarc-os-specific-header) * (1 - min(1, (
+        var(--vvh-grid-title-bar, 0)
+        + var(--vvh-grid-address-bar-top, 0)
+        + var(--vvh-grid-bookmark-bar-top, 0)
+      ))));
+    }
   }
 
   @include base.grid-layout-title-bar-full-width; // always enabled because VivalArc expects a full width title bar
@@ -145,7 +154,7 @@
   #browser.disable-titlebar {
     #{variables.$select-panel},
     #{variables.$select-webpage} {
-      margin-top: var(--vvh-vivalarc-os-specific-header) !important;
+      margin-top: var(--vvh-vivalarc-os-specific-header);
     }
   }
 }
