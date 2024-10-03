@@ -166,7 +166,7 @@
     &:has(#{variables.$select-status-bar}) {
       --vvh-grid-status-bar: 1;
 
-      #{variables.$select-status-bar} {
+      #{variables.$select-footer-has-status-bar} {
         grid-row: -2 / -1;
       }
     }
