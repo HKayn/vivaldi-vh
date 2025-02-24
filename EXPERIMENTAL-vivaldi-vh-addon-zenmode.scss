@@ -122,11 +122,13 @@
 
     #{variables.$select-webpage} {
       grid-column: 1 / 9999;
+      margin: var(--window-border);
     }
 
     #{variables.$select-tab-bar},
     #{variables.$select-panel} {
       position: relative;
+      background-color: var(--colorTabBar);
 
       &::after { // #tabbar-wrapper:before is already in use by the browser
         position: absolute;
